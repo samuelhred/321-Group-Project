@@ -9,13 +9,19 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = API
 build_property.RootNamespace = API
+<<<<<<< HEAD
 build_property.ProjectDir = c:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\API\
+=======
+build_property.ProjectDir = /Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/
+>>>>>>> d7b4714876c867b646904b2f12d85aea3e91d8f9
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+<<<<<<< HEAD
 build_property.MSBuildProjectDirectory = c:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\API
+=======
+build_property.MSBuildProjectDirectory = /Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API
+>>>>>>> d7b4714876c867b646904b2f12d85aea3e91d8f9
 build_property._RazorSourceGeneratorDebug = 
-build_property.EffectiveAnalysisLevelStyle = 8.0
-build_property.EnableCodeStyleSeverity = 
