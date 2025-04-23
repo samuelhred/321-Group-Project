@@ -62,3 +62,14 @@ function openModal(eventElement) {
 function closeModal() {
     document.getElementById('eventModal').style.display = "none";
 }
+
+function displayEvents(id) {
+    currentEvent = myEvents.find(r => r.id == id)
+    const eventData = document.getElementById('eventData')
+    
+    eventData.innerHTML = `
+    <strong>Event Name:</strong> ${currentEvent.Name}<br>
+    <strong>Event Date:</strong> ${currentEvent.Date}<br>
+    <strong>Event Location:</strong> ${currentEvent.Location}<br>
+    `;
+}
