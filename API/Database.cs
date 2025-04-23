@@ -83,8 +83,8 @@ namespace API
                 {
                     Id = reader.GetInt32(0),
                     Name = reader.GetString(1),
-                    Description = reader.GetString(3),
-                    VendorId = reader.GetInt32(4)
+                    Description = reader.GetString(2),
+                    VendorId = reader.GetInt32(3)
                 });
             }
             return myProducts;

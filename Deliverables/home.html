@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./layout.css">
     <link rel="stylesheet" href="./icomoon.css">
 </head>
-<body>
+<body onload="handleOnLoad()">
     <header>
         <div class="header-left">
             <a href="home.html"><span class="icon-vendor-cart"></span></a>
@@ -39,9 +39,7 @@
                 data-description="Description for Event 2">                
                 <img src="./images/Coleman.jpg" alt="Event 2"/>
                 <div class="event-info">
-                    <h3>Event 2</h3>
-                    <p>Date/Time: 2023-10-15 2:00 PM</p>
-                    <p>Location: Location 2</p>
+                    <p id="eventData"></p>
                 </div>
             </div>
             <div class="event" onclick="openModal(this)" 
@@ -49,9 +47,7 @@
                 data-description="Description for Event 3">
                 <img src="./images/TownSquare.jpg" alt="Event 3"/>
                 <div class="event-info">
-                    <h3>Event 3</h3>
-                    <p>Date/Time: 2023-11-01 5:00 PM</p>
-                    <p>Location: Location 3</p>
+                    <p id="eventData"></p>
                 </div>
             </div>
         </section>

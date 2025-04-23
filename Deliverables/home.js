@@ -63,13 +63,30 @@ function closeModal() {
     document.getElementById('eventModal').style.display = "none";
 }
 
+let events = [];
+
+let currentEvent = null;
+
+const url = `http://localhost:5089/api/Data/1`
+
+async function handleOnLoad() {
+    await getAllEvents()
+    displayEvents()
+}
+
+async function getAllEvents() {
+    let response = await fetch(url)
+    events = await response.json()
+    console.log(events)
+}
+
 function displayEvents(id) {
-    currentEvent = myEvents.find(r => r.id == id)
+    currentEvent = events.find(r => r.id == id)
     const eventData = document.getElementById('eventData')
     
     eventData.innerHTML = `
     <strong>Event Name:</strong> ${currentEvent.Name}<br>
-    <strong>Event Date:</strong> ${currentEvent.Date}<br>
-    <strong>Event Location:</strong> ${currentEvent.Location}<br>
+    <strong>Date:</strong> ${currentEvent.Date}<br>
+    <strong>Location:</strong> ${currentEvent.Location}<br>
     `;
 }
