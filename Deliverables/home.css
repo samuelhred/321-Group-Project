@@ -129,7 +129,6 @@ main {
     background-color: var(--roll-tide-red);
 }
 
-/* Add media query for responsive layout */
 @media screen and (max-width: 1200px) {
     #events {
         width: 40%;
