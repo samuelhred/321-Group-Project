@@ -26,9 +26,9 @@ main {
     gap: 20px; /* Space */
     background-color: var(--victory-white);
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 30%;
+    width: 33%;
     margin: 5rem auto 2rem auto;
 }
 
