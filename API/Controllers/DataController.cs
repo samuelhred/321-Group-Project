@@ -14,18 +14,30 @@ namespace MyApp.Namespace
 
         public async Task <object[]> Get()
         {
-            Database db = new ();            
+            Database db = new Database();            
             return await db.GetAllDataAsync();
         }
 
         // GET api/<ShopController>/5
         [HttpGet("{type}", Name = "GetOneSet")]
-        public async Task<List<object>> Get(int type)
+    public async Task<List<object>> Get(int type)
+    {
+        Database db = new();
+        switch (type)
         {
-            Database db = new ();
-            List<Object> data = await db.GetDatasetAsync(type);
-            return data;
+            case 0:
+                return await db.GetAllVendorsAsync().ContinueWith(task => task.Result.Cast<object>().ToList());
+            case 1:
+                return await db.GetAllEventsAsync().ContinueWith(task => task.Result.Cast<object>().ToList());
+            case 2:
+                return await db.GetAllProductsAsync().ContinueWith(task => task.Result.Cast<object>().ToList());
+            case 3:
+                return await db.GetAllRegistrationsAsync().ContinueWith(task => task.Result.Cast<object>().ToList());
+            default:
+                // Return an empty list if the type is invalid
+                return new List<object>();
         }
+    }
 
         // GET api/<ShopController>/5
         [HttpGet("{id}/{type}", Name = "GetOneInfo")]

@@ -12,7 +12,7 @@ namespace API
         {
             // Fetch all data concurrently
             var vendorsTask = GetAllVendorsAsync();
-            var eventsTask = GetAllEvents(); // Assuming 0 is a placeholder for the `id` parameter
+            var eventsTask = GetAllEventsAsync(); // Assuming 0 is a placeholder for the `id` parameter
             var registrationsTask = GetAllRegistrationsAsync();
             var productsTask = GetAllProductsAsync();
 
@@ -46,7 +46,7 @@ namespace API
                     }
                     return myVendors;
                 }
-        public async Task<List<Event>> GetAllEvents(){
+        public async Task<List<Event>> GetAllEventsAsync(){
             List<Event> myEvents = new List<Event>();
 
             using var connection = new MySqlConnection(cs);
@@ -159,6 +159,8 @@ namespace API
                 return null;
             }
         }
+
+
         public async Task<bool> AddDataAsync(int type, object newItem)
         {
             try
