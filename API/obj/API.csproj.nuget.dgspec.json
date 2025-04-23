@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/samredelsheimer/Documents/GROUPPROJ/API/API.csproj": {}
+    "/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/API.csproj": {}
   },
   "projects": {
-    "/Users/samredelsheimer/Documents/GROUPPROJ/API/API.csproj": {
+    "/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/samredelsheimer/Documents/GROUPPROJ/API/API.csproj",
+        "projectUniqueName": "/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/API.csproj",
         "projectName": "API",
-        "projectPath": "/Users/samredelsheimer/Documents/GROUPPROJ/API/API.csproj",
+        "projectPath": "/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/API.csproj",
         "packagesPath": "/Users/samredelsheimer/.nuget/packages/",
-        "outputPath": "/Users/samredelsheimer/Documents/GROUPPROJ/API/obj/",
+        "outputPath": "/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/samredelsheimer/.nuget/NuGet/NuGet.Config"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "InfTZonWVCY=",
+  "dgSpecHash": "GyVzip54/ws=",
   "success": true,
-  "projectFilePath": "/Users/samredelsheimer/Documents/GROUPPROJ/API/API.csproj",
+  "projectFilePath": "/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/API.csproj",
   "expectedPackageFiles": [
     "/Users/samredelsheimer/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "/Users/samredelsheimer/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.2/microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
