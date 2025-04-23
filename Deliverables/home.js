@@ -40,39 +40,59 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function openModal(eventElement) {
     const title = eventElement.getAttribute('data-title');
-    const description = eventElement.getAttribute('data-description');
 
     document.getElementById('modalTitle').innerText = title;
-    document.getElementById('modalDescription').innerText = description;
+    document.getElementById('modalDescription').innerHTML = `
+        <button class="register-btn" onclick="handleRegister('${title}')">Register</button>
+    `;
 
     const modal = document.getElementById('eventModal');
     modal.style.display = 'block';
+
+    // Add click event listener to the modal background
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Store the currently open event for reference
+    window.currentOpenEvent = eventElement;
 }
 
 function closeModal() {
     const modal = document.getElementById('eventModal');
     modal.style.display = "none";
+    window.currentOpenEvent = null;
 }
 
 function toggleModal(eventElement) {
     const modal = document.getElementById('eventModal');
+    
     if (modal.style.display === 'block') {
-        closeModal();
+        // If clicking the same event that's currently shown, close the modal
+        if (window.currentOpenEvent === eventElement) {
+            closeModal();
+        } else {
+            // If clicking a different event, update the modal content
+            openModal(eventElement);
+        }
     } else {
         openModal(eventElement);
     }
+}
+
+function handleRegister(eventTitle) {
+    // You can add registration logic here
+    console.log(`Registering for event: ${eventTitle}`);
+    // For now, just close the modal
+    closeModal();
 }
 
 const url = `http://localhost:5089/api/Data/1`
 
 async function handleOnLoad() {
     const eventContainer = document.getElementById('eventContainer');
-
-    const eventDescriptions = {
-        "test": "Annual spring fesival celebrating local culture.",
-        "test2": "Explore the wonders of the universe at this science fair.",
-        "test3": "Join us for a day of fun and games at the community center.",
-    };
 
     try {
         const response = await fetch(url);
@@ -90,9 +110,6 @@ async function handleOnLoad() {
             eventDiv.setAttribute('data-title', event.name);
             eventDiv.setAttribute('data-date', event.date);
             eventDiv.setAttribute('data-location', event.location);
-
-            const description = eventDescriptions[event.name] || "No description currently available for this event.";
-            eventDiv.setAttribute('data-description', description);
 
             eventDiv.onclick = () => toggleModal(eventDiv);
 
