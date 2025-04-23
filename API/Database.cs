@@ -41,7 +41,7 @@ namespace API
                     using var reader = await command.ExecuteReaderAsync();
                     while (await reader.ReadAsync())
                     {
-                        myVendors.Add(new Vendor(){id = reader.GetInt32(0), Name = reader.GetString(1), Type = reader.GetString(2), Address = reader.GetString(3), Phone = reader.GetString(4), Email = reader.GetString(5), Website = reader.GetString(6)});
+                        myVendors.Add(new Vendor(){id = reader.GetInt32(0), Name = reader.GetString(1), Type = reader.GetString(2), Address = reader.GetString(3), Phone = reader.GetString(4), Email = reader.GetString(5), Website = reader.GetString(6), Username = reader.GetString(7), Password = reader.GetString(8)});
 
                     }
                     return myVendors;
@@ -170,7 +170,7 @@ namespace API
 
                 string query = type switch
                 {
-                    0 => "INSERT INTO jaksf1wi5maqj0w4.Vendors (Name, Type, Address, Phone, Email, Website) VALUES (@Name, @Type, @Address, @Phone, @Email, @Website);",
+                    0 => "INSERT INTO jaksf1wi5maqj0w4.Vendors (Name, Type, Address, Phone, Email, Website) VALUES (@Name, @Type, @Address, @Phone, @Email, @Website, @Username, @Password);",
                     1 => "INSERT INTO jaksf1wi5maqj0w4.Events (Name, Date, Location, Description) VALUES (@Name, @Date, @Location, @Description);",
                     2 => "INSERT INTO jaksf1wi5maqj0w4.Products (Name, Price, Description, VendorId) VALUES (@Name, @Price, @Description, @VendorId);",
                     3 => "INSERT INTO jaksf1wi5maqj0w4.Registration (EventId, UserId, RegistrationDate, Status) VALUES (@EventId, @UserId, @RegistrationDate, @Status);",
@@ -183,7 +183,7 @@ namespace API
                 switch (type)
                 {
                     case 0: // Vendors
-                        var vendor = (Vendor)newItem;
+                        var vendor = System.Text.Json.JsonSerializer.Deserialize<Vendor>(newItem.ToString());
                         command.Parameters.AddWithValue("@Name", vendor.Name);
                         command.Parameters.AddWithValue("@Type", vendor.Type);
                         command.Parameters.AddWithValue("@Address", vendor.Address);
@@ -195,21 +195,21 @@ namespace API
                         break;
 
                     case 1: // Events
-                        var eventItem = (Event)newItem;
+                        var eventItem = System.Text.Json.JsonSerializer.Deserialize<Event>(newItem.ToString());
                         command.Parameters.AddWithValue("@Name", eventItem.Name);
                         command.Parameters.AddWithValue("@Date", eventItem.Date);
                         command.Parameters.AddWithValue("@Location", eventItem.Location);
                         break;
 
                     case 2: // Products
-                        var product = (Product)newItem;
+                        var product = System.Text.Json.JsonSerializer.Deserialize<Product>(newItem.ToString());
                         command.Parameters.AddWithValue("@Name", product.Name);
                         command.Parameters.AddWithValue("@Description", product.Description);
                         command.Parameters.AddWithValue("@VendorId", product.VendorId);
                         break;
 
                     case 3: // Registrations
-                        var registration = (Registration)newItem;
+                        var registration = System.Text.Json.JsonSerializer.Deserialize<Registration>(newItem.ToString());
                         command.Parameters.AddWithValue("@EventId", registration.EventId);
                         command.Parameters.AddWithValue("@VendorId", registration.VendorId);
                         command.Parameters.AddWithValue("@Status", registration.ProductId);
@@ -219,8 +219,9 @@ namespace API
                 int rowsAffected = await command.ExecuteNonQueryAsync();
                 return rowsAffected > 0;
             }
-            catch
+            catch(Exception ex)
             {
+                Console.WriteLine($"Error in AddDataAsync: {ex.Message}");
                 return false;
             }
         }
