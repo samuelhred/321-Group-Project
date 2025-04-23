@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Fetch and display events
 function openModal(eventElement) {
     // Retrieve data from the clicked event element
     const title = eventElement.getAttribute('data-title');
@@ -48,45 +47,48 @@ function openModal(eventElement) {
     document.getElementById('modalTitle').innerText = title;
     document.getElementById('modalDescription').innerText = description;
 
-    // Get the event container position
-    const eventContainer = document.getElementById('events');
-    const rect = eventContainer.getBoundingClientRect();
-
-    // Position the modal to the right of the event container
+    // Display the modal
     const modal = document.getElementById('eventModal');
-    modal.style.display = "block";
-    modal.style.top = `${rect.top + window.scrollY + rect.height / 2 - modal.offsetHeight / 2}px`;
-    modal.style.left = `${rect.right + 20}px`; // 20px gap from the event container
+    modal.style.display = 'block';
 }
 
 function closeModal() {
     document.getElementById('eventModal').style.display = "none";
 }
 
-let events = [];
-
-let currentEvent = null;
-
 const url = `http://localhost:5089/api/Data/1`
 
 async function handleOnLoad() {
-    await getAllEvents()
-    displayEvents()
-}
+    const eventContainer = document.getElementById('eventContainer');
 
-async function getAllEvents() {
-    let response = await fetch(url)
-    events = await response.json()
-    console.log(events)
-}
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch events: ${response.statusText}`);
+        }
 
-function displayEvents(id) {
-    currentEvent = events.find(r => r.id == id)
-    const eventData = document.getElementById('eventData')
-    
-    eventData.innerHTML = `
-    <strong>Event Name:</strong> ${currentEvent.Name}<br>
-    <strong>Date:</strong> ${currentEvent.Date}<br>
-    <strong>Location:</strong> ${currentEvent.Location}<br>
-    `;
+        const events = await response.json();
+
+        eventContainer.innerHTML = '';
+
+        events.forEach(event => {
+            const eventDiv = document.createElement('div');
+            eventDiv.className = 'event';
+            eventDiv.setAttribute('data-title', event.name);
+            eventDiv.setAttribute('data-date', event.date);
+            eventDiv.setAttribute('data-location', event.location);
+            eventDiv.onclick = () => openModal(eventDiv);
+            eventDiv.innerHTML = `
+                <div class="event-info">
+                    <p><strong>${event.name}</strong></p>
+                    <p>${event.date}</p>
+                    <p>${event.location}</p>
+                </div>
+            `;
+            eventContainer.appendChild(eventDiv);
+        });
+    } catch (error) {
+        console.error('Error loading events:', error);
+        eventContainer.innerHTML = '<p>Failed to load events. Please try again later.</p>';
+    }
 }

@@ -23,56 +23,54 @@ main {
 #events {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Space */
+    gap: 20px;
     background-color: var(--victory-white);
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 33%;
-    margin: 5rem auto 2rem auto;
+    width: 25%;
+    margin: 2rem auto;
+    position: relative;
 }
 
 .event {
-    border-radius: 5px; /* Rounded corners */
-    display: flex; /* Align image and info side by side */
-    align-items: center; /* Center vertically */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: box-shadow 0.3s; /* Smooth shadow transition */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    border: 1px solid var(--capstone-gray);
+    border-radius: 5px;
     background-color: var(--chimes-gray);
-    border: 2px dashed var(--capstone-gray);
-    justify-content: center;
-    color: var(--pachyderm);
-    font-style: italic;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 20px;
 }
 
 .event:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow on hover */
-}
-
-.event img {
-    width: 200px; /* Set a fixed width for the image */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 15px; /* Space between image and text */
+    background-color: var(--ivory-tusk);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .event-info {
     display: flex;
     flex-direction: column;
+    align-items: space-between;
+    line-height: .25;
+    gap: 5px;
 }
 
 .modal {
-    display: none; /* Hidden by default */
-    position: absolute; /* Position it absolutely */
-    top: 50%; /* Center vertically */
-    left: calc(100% + 20px); /* Position to the right of the event container */
-    transform: translateY(-50%); /* Adjust for vertical centering */
-    background-color: white; /* Background color */
-    border: 1px solid #ccc; /* Border color */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
-    z-index: 1000; /* Ensure it appears above other content */
-    width: 300px; /* Set a width for the modal */
-    padding: 15px; /* Inner spacing */
+    display: none;
+    position: absolute;
+    top: 0;
+    left: calc(100% + 20px);
+    transform: translateY(-50%);
+    background-color: var(--victory-white);
+    border: 1px solid var(--capstone-gray);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+    padding: 15px;
 }
 
 #book-booth button {
