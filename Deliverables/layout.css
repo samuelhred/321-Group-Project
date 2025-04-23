@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+
+:root {
+    --crimson-flame: #9E1B32;
+    --capstone-gray: #828A8F;
+    --victory-white: #FFFFFF;
+    --legends-black: #000000;
+    --pachyderm: #5F6A72;
+    --chimes-gray: #C1C6C9;
+    --ivory-tusk: #DAD7CB;
+    --bama-burgundy: #772432;
+    --roll-tide-red: #D0103A;
+  }
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--pachyderm);
+    background-color: var(--victory-white);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+/* Header */
+header {
+    width: 100vw;
+    max-width: 100%;
+    padding: 1rem 2rem;
+    background-color: var(--crimson-flame);
+    color: var(--victory-white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Ensure Logo and Title Appear Side by Side */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left a {
+    text-decoration: none;;
+}
+
+.header-left h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+.header-right ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+.header-right ul li {
+    display: inline;
+}
+
+.header-right ul li a {
+    color: var(--victory-white);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header-right ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    width: 100vw;
+    max-width: 100%;
+    padding: 1rem 2rem;
+    background-color: var(--crimson-flame);
+    color: var(--victory-white);
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-left {
+    text-align: left;
+    padding-left: 2rem;
+}
+
+.footer-right {
+    text-align: right;
+    padding-right: 2rem;
+}
+
+.footer-right ul {
+    list-style: none;
+}
+
+.footer-right ul li {
+    display: inline;
+    margin-left: 1rem;
+}
+
+.footer-right ul li a {
+    color: var(--victory-white);
+    text-decoration: none;
+}
+
+.footer-right ul li a:hover {
+    text-decoration: underline;
+}
