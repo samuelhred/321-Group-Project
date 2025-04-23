@@ -1,0 +1,34 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+    color: brown;}
+#app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form input, form button {
+    margin-bottom: 10px;
+}
+table {
+    margin-bottom: 20px;
+}
+th, td {
+    border: 2px solid brown;
+    padding: 8px;
+}
+header{
+    color: brown;
+    font-size: 60px;
+    font-style: oblique;
+}
+
+button:hover {
+    background-color: brown;
+    color: white;
+    border-color : white;
+}
