@@ -39,21 +39,28 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function openModal(eventElement) {
-    // Retrieve data from the clicked event element
     const title = eventElement.getAttribute('data-title');
     const description = eventElement.getAttribute('data-description');
 
-    // Set the modal content
     document.getElementById('modalTitle').innerText = title;
     document.getElementById('modalDescription').innerText = description;
 
-    // Display the modal
     const modal = document.getElementById('eventModal');
     modal.style.display = 'block';
 }
 
 function closeModal() {
-    document.getElementById('eventModal').style.display = "none";
+    const modal = document.getElementById('eventModal');
+    modal.style.display = "none";
+}
+
+function toggleModal(eventElement) {
+    const modal = document.getElementById('eventModal');
+    if (modal.style.display === 'block') {
+        closeModal();
+    } else {
+        openModal(eventElement);
+    }
 }
 
 const url = `http://localhost:5089/api/Data/1`
@@ -87,7 +94,7 @@ async function handleOnLoad() {
             const description = eventDescriptions[event.name] || "No description currently available for this event.";
             eventDiv.setAttribute('data-description', description);
 
-            eventDiv.onclick = () => openModal(eventDiv);
+            eventDiv.onclick = () => toggleModal(eventDiv);
 
             eventDiv.innerHTML = `
                 <div class="event-info">
