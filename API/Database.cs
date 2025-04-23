@@ -7,7 +7,7 @@ namespace API
 {
     public class Database
     {
-        private string cs = "Server=127.0.0.1;User ID=root;Password=3304.WildSeed;Database=321PROJ";
+        private string cs = "Server=t89yihg12rw77y6f.cbetxkdyhwsb.us-east-1.rds.amazonaws.com;User ID=off48goef0ulemt7;Password=sid95mjw7064tld5;Database=jaksf1wi5maqj0w4";
         public async Task<object[]> GetAllDataAsync()
         {
             // Fetch all data concurrently
@@ -36,7 +36,7 @@ namespace API
                     using var connection = new MySqlConnection(cs);
                     await connection.OpenAsync();
 
-                    using var command = new MySqlCommand("SELECT * FROM 321PROJ.Vendors;", connection);
+                    using var command = new MySqlCommand("SELECT * FROM jaksf1wi5maqj0w4.Vendors;", connection);
 
                     using var reader = await command.ExecuteReaderAsync();
                     while (await reader.ReadAsync())
@@ -52,7 +52,7 @@ namespace API
             using var connection = new MySqlConnection(cs);
             await connection.OpenAsync();
 
-            using var command = new MySqlCommand("SELECT * FROM 321PROJ.Events;", connection);
+            using var command = new MySqlCommand("SELECT * FROM jaksf1wi5maqj0w4.Events;", connection);
 
             using var reader = await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
@@ -74,7 +74,7 @@ namespace API
             using var connection = new MySqlConnection(cs);
             await connection.OpenAsync();
 
-            using var command = new MySqlCommand("SELECT * FROM 321PROJ.Products;", connection);
+            using var command = new MySqlCommand("SELECT * FROM jaksf1wi5maqj0w4.Products;", connection);
 
             using var reader = await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
@@ -96,7 +96,7 @@ namespace API
             using var connection = new MySqlConnection(cs);
             await connection.OpenAsync();
 
-            using var command = new MySqlCommand("SELECT * FROM 321PROJ.Registration;", connection);
+            using var command = new MySqlCommand("SELECT * FROM jaksf1wi5maqj0w4.Registration;", connection);
 
             using var reader = await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
@@ -168,10 +168,10 @@ namespace API
 
                 string query = type switch
                 {
-                    0 => "INSERT INTO Vendors (Name, Type, Address, Phone, Email, Website) VALUES (@Name, @Type, @Address, @Phone, @Email, @Website);",
-                    1 => "INSERT INTO Events (Name, Date, Location, Description) VALUES (@Name, @Date, @Location, @Description);",
-                    2 => "INSERT INTO Products (Name, Price, Description, VendorId) VALUES (@Name, @Price, @Description, @VendorId);",
-                    3 => "INSERT INTO Registrations (EventId, UserId, RegistrationDate, Status) VALUES (@EventId, @UserId, @RegistrationDate, @Status);",
+                    0 => "INSERT INTO jaksf1wi5maqj0w4.Vendors (Name, Type, Address, Phone, Email, Website) VALUES (@Name, @Type, @Address, @Phone, @Email, @Website);",
+                    1 => "INSERT INTO jaksf1wi5maqj0w4.Events (Name, Date, Location, Description) VALUES (@Name, @Date, @Location, @Description);",
+                    2 => "INSERT INTO jaksf1wi5maqj0w4.Products (Name, Price, Description, VendorId) VALUES (@Name, @Price, @Description, @VendorId);",
+                    3 => "INSERT INTO jaksf1wi5maqj0w4.Registration (EventId, UserId, RegistrationDate, Status) VALUES (@EventId, @UserId, @RegistrationDate, @Status);",
                     _ => throw new ArgumentException("Invalid type")
                 };
 
@@ -231,10 +231,10 @@ namespace API
 
                 string query = type switch
                 {
-                    0 => "UPDATE Vendors SET Name = @Name, Type = @Type, Address = @Address, Phone = @Phone, Email = @Email, Website = @Website WHERE id = @Id;",
-                    1 => "UPDATE Events SET Name = @Name, Date = @Date, Location = @Location, Description = @Description WHERE id = @Id;",
-                    2 => "UPDATE Products SET Name = @Name, Price = @Price, Description = @Description, VendorId = @VendorId WHERE id = @Id;",
-                    3 => "UPDATE Registrations SET EventId = @EventId, UserId = @UserId, RegistrationDate = @RegistrationDate, Status = @Status WHERE id = @Id;",
+                    0 => "UPDATE jaksf1wi5maqj0w4.Vendors SET Name = @Name, Type = @Type, Address = @Address, Phone = @Phone, Email = @Email, Website = @Website WHERE id = @Id;",
+                    1 => "UPDATE jaksf1wi5maqj0w4.Events SET Name = @Name, Date = @Date, Location = @Location, Description = @Description WHERE id = @Id;",
+                    2 => "UPDATE jaksf1wi5maqj0w4.Products SET Name = @Name, Price = @Price, Description = @Description, VendorId = @VendorId WHERE id = @Id;",
+                    3 => "UPDATE jaksf1wi5maqj0w4.Registration SET EventId = @EventId, UserId = @UserId, RegistrationDate = @RegistrationDate, Status = @Status WHERE id = @Id;",
                     _ => throw new ArgumentException("Invalid type")
                 };
 
@@ -293,10 +293,10 @@ namespace API
 
                 string query = type switch
                 {
-                    0 => "DELETE FROM Vendors WHERE id = @Id;",
-                    1 => "DELETE FROM Events WHERE id = @Id;",
-                    2 => "DELETE FROM Products WHERE id = @Id;",
-                    3 => "DELETE FROM Registrations WHERE id = @Id;",
+                    0 => "DELETE FROM jaksf1wi5maqj0w4.Vendors WHERE id = @Id;",
+                    1 => "DELETE FROM jaksf1wi5maqj0w4.Events WHERE id = @Id;",
+                    2 => "DELETE FROM jaksf1wi5maqj0w4.Products WHERE id = @Id;",
+                    3 => "DELETE FROM jaksf1wi5maqj0w4.Registration WHERE id = @Id;",
                     _ => throw new ArgumentException("Invalid type")
                 };
 
