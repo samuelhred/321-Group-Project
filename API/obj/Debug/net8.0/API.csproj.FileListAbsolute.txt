@@ -106,39 +106,3 @@
 /Users/samredelsheimer/MIS 321/GIT/mis-321-pa3-samuelhred/API/obj/Debug/net8.0/API.pdb
 /Users/samredelsheimer/MIS 321/GIT/mis-321-pa3-samuelhred/API/obj/Debug/net8.0/API.genruntimeconfig.cache
 /Users/samredelsheimer/MIS 321/GIT/mis-321-pa3-samuelhred/API/obj/Debug/net8.0/ref/API.dll
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/appsettings.Development.json
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/appsettings.json
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/API
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/API.deps.json
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/API.runtimeconfig.json
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/API.dll
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/API.pdb
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/Microsoft.OpenApi.dll
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/MySqlConnector.dll
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.csproj.AssemblyReference.cache
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.GeneratedMSBuildEditorConfig.editorconfig
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.AssemblyInfoInputs.cache
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.AssemblyInfo.cs
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.csproj.CoreCompileInputs.cache
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.MvcApplicationPartsAssemblyInfo.cs
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.MvcApplicationPartsAssemblyInfo.cache
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.sourcelink.json
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/staticwebassets.build.json
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/staticwebassets.development.json
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/staticwebassets/msbuild.API.Microsoft.AspNetCore.StaticWebAssets.props
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/staticwebassets/msbuild.build.API.props
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.API.props
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.API.props
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/staticwebassets.pack.json
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/scopedcss/bundle/API.styles.css
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.csproj.Up2Date
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.dll
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/refint/API.dll
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.pdb
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.genruntimeconfig.cache
-/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/ref/API.dll
