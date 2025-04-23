@@ -38,38 +38,75 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Fetch and display events
 function openModal(eventElement) {
-    // Retrieve data from the clicked event element
     const title = eventElement.getAttribute('data-title');
     const description = eventElement.getAttribute('data-description');
 
-    // Set the modal content
     document.getElementById('modalTitle').innerText = title;
     document.getElementById('modalDescription').innerText = description;
 
-    // Get the event container position
-    const eventContainer = document.getElementById('events');
-    const rect = eventContainer.getBoundingClientRect();
-
-    // Position the modal to the right of the event container
     const modal = document.getElementById('eventModal');
-    modal.style.display = "block";
-    modal.style.top = `${rect.top + window.scrollY + rect.height / 2 - modal.offsetHeight / 2}px`;
-    modal.style.left = `${rect.right + 20}px`; // 20px gap from the event container
+    modal.style.display = 'block';
 }
 
 function closeModal() {
-    document.getElementById('eventModal').style.display = "none";
+    const modal = document.getElementById('eventModal');
+    modal.style.display = "none";
 }
 
-function displayEvents(id) {
-    currentEvent = myEvents.find(r => r.id == id)
-    const eventData = document.getElementById('eventData')
-    
-    eventData.innerHTML = `
-    <strong>Event Name:</strong> ${currentEvent.Name}<br>
-    <strong>Event Date:</strong> ${currentEvent.Date}<br>
-    <strong>Event Location:</strong> ${currentEvent.Location}<br>
-    `;
+function toggleModal(eventElement) {
+    const modal = document.getElementById('eventModal');
+    if (modal.style.display === 'block') {
+        closeModal();
+    } else {
+        openModal(eventElement);
+    }
+}
+
+const url = `http://localhost:5089/api/Data/1`
+
+async function handleOnLoad() {
+    const eventContainer = document.getElementById('eventContainer');
+
+    const eventDescriptions = {
+        "test": "Annual spring fesival celebrating local culture.",
+        "test2": "Explore the wonders of the universe at this science fair.",
+        "test3": "Join us for a day of fun and games at the community center.",
+    };
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch events: ${response.statusText}`);
+        }
+
+        const events = await response.json();
+
+        eventContainer.innerHTML = '';
+
+        events.forEach(event => {
+            const eventDiv = document.createElement('div');
+            eventDiv.className = 'event';
+            eventDiv.setAttribute('data-title', event.name);
+            eventDiv.setAttribute('data-date', event.date);
+            eventDiv.setAttribute('data-location', event.location);
+
+            const description = eventDescriptions[event.name] || "No description currently available for this event.";
+            eventDiv.setAttribute('data-description', description);
+
+            eventDiv.onclick = () => toggleModal(eventDiv);
+
+            eventDiv.innerHTML = `
+                <div class="event-info">
+                    <p><strong>${event.name}</strong></p>
+                    <p>${event.date}</p>
+                    <p>${event.location}</p>
+                </div>
+            `;
+            eventContainer.appendChild(eventDiv);
+        });
+    } catch (error) {
+        console.error('Error loading events:', error);
+        eventContainer.innerHTML = '<p>Failed to load events. Please try again later.</p>';
+    }
 }
