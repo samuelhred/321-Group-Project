@@ -61,6 +61,12 @@ const url = `http://localhost:5089/api/Data/1`
 async function handleOnLoad() {
     const eventContainer = document.getElementById('eventContainer');
 
+    const eventDescriptions = {
+        "test": "Annual spring fesival celebrating local culture.",
+        "test2": "Explore the wonders of the universe at this science fair.",
+        "test3": "Join us for a day of fun and games at the community center.",
+    };
+
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -77,7 +83,12 @@ async function handleOnLoad() {
             eventDiv.setAttribute('data-title', event.name);
             eventDiv.setAttribute('data-date', event.date);
             eventDiv.setAttribute('data-location', event.location);
+
+            const description = eventDescriptions[event.name] || "No description currently available for this event.";
+            eventDiv.setAttribute('data-description', description);
+
             eventDiv.onclick = () => openModal(eventDiv);
+
             eventDiv.innerHTML = `
                 <div class="event-info">
                     <p><strong>${event.name}</strong></p>

@@ -61,16 +61,17 @@ main {
 .modal {
     display: none;
     position: absolute;
-    top: 0;
-    left: calc(100% + 20px);
+    top: 18.4%;
+    left: calc(66% + 20px);
     transform: translateY(-50%);
     background-color: var(--victory-white);
-    border: 1px solid var(--capstone-gray);
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--victory-white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
     z-index: 1000;
     width: 300px;
-    padding: 15px;
 }
 
 #book-booth button {
