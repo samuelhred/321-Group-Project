@@ -620,11 +620,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\api\\API.csproj",
+      "projectUniqueName": "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\api\\API.csproj",
+      "projectPath": "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\API\\API.csproj",
       "packagesPath": "C:\\Users\\corbi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\api\\obj\\",
+      "outputPath": "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\corbi\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -688,13 +688,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\api\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

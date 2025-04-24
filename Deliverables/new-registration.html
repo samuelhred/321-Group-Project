@@ -95,6 +95,25 @@
         font-size: 16px;
         color: #333;
     }
+    .event-button {
+        font-size: 18px; /* Increase the font size */
+        padding: 15px 20px; /* Add more padding for larger buttons */
+        border: 2px solid #9E1B32; /* Optional: Add a border */
+        border-radius: 8px; /* Round the corners */
+        background-color: #9E1B32; /* Button background color */
+        color: white; /* Button text color */
+        cursor: pointer; /* Change cursor to pointer */
+        margin: 10px 0; /* Add spacing between buttons */
+        width: 100%; /* Make the button take full width of the container */
+        text-align: center; /* Center the text */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        transition: transform 0.2s ease, background-color 0.2s ease; /* Add hover effects */
+    }
+    
+    .event-button:hover {
+        background-color: lightgray; /* Darker blue on hover */
+        transform: scale(1.05); /* Slightly enlarge the button on hover */
+    }
 </style>
 <body onload="loadEvents()">
     <!-- Header -->
@@ -114,14 +133,14 @@
 
     <!-- Main Content -->
     <main>
-        <div id = "header"></div>
+        <div id="header"></div>
         <section id="events-section">
             <div id="main-container">
-                <div id = "payment-container">
-                    <div id="events-container">
+                <div id="events-container"></div>
+                    <div id="payment-container">
+                    
                         <!-- Events will be dynamically loaded here -->
                     </div>
-                    <button id="submit-button">Submit</button>
                 </div>
             </div>
         </section>

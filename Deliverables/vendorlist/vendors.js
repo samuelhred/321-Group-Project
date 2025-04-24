@@ -3,7 +3,9 @@ let allVendors = []; // Store all vendors for filtering
 async function HandleOnLoad() {
     try {
         const response = await fetch('http://localhost:5089/api/Data/0');
-        allVendors = await response.json();
+        const vendors = await response.json();
+        // Filter out the admin user (ID: -1)
+        allVendors = vendors.filter(vendor => vendor.id !== -1);
         displayVendors(allVendors);
         setupSearchAndFilter();
         populateVendorTypes();
@@ -126,7 +128,3 @@ function applyFilters() {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', HandleOnLoad);
-
-
-
-

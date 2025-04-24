@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./reports.css">
     <link rel="stylesheet" href="./icomoon.css">
 </head>
-<body>
+<body onload="loadContent('reports')">
     <input type="checkbox" id="sidebar-toggle">
     <div class="sidebar">
         <div class="sidebar-header">
@@ -21,25 +21,25 @@
         <nav class="header-right">
             <ul>
                 <li>
-                    <a href="#" onclick="loadContent('reports.html')">
+                    <a href="#" onclick="loadContent('reports')">
                         <span class="ti-bar-chart"></span>
                         <span>Reports</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" onclick="loadContent('events.html')">
+                    <a href="#" onclick="loadContent('events')">
                         <span class="ti-calendar"></span>
                         <span>Events</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" onclick="loadContent('vendors.html')">
+                    <a href="#" onclick="loadContent('vendors')">
                         <span class="ti-briefcase"></span>
                         <span>Vendors</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" onclick="loadContent('settings.html')">
+                    <a href="#" onclick="loadContent('settings')">
                         <span class="ti-settings"></span>
                         <span>Account</span>
                     </a>
@@ -52,7 +52,7 @@
         <header>
             <div class="search-wrapper">
                 <span class="ti-search"></span>
-                <input type="search" placeholder="Search reports">
+                <input type="search" placeholder="Search">
             </div>
             
             <div class="social-icons">
@@ -63,258 +63,460 @@
         </header>
 
         <main>
-            <h2 class="dash-title">Reports Overview</h2>
-            
-            <div class="dash-cards">
-                <div class="card-single">
-                    <div class="card-body">
-                        <span class="ti-shopping-cart-full"></span>
-                        <div>
-                            <h5>Total Sales</h5>
-                            <h4>$198,000.00</h4>
+            <!-- Reports Content -->
+            <div id="reports-content" class="content-section">
+                <h2 class="dash-title">Reports Overview</h2>
+                
+                <div class="dash-cards">
+                    <div class="card-single">
+                        <div class="card-body">
+                            <span class="ti-package"></span>
+                            <div>
+                                <h5>Total Products</h5>
+                                <h4>0</h4>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#">View Products</a>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <a href="#">View Details</a>
-                    </div>
-                </div>
 
-                <div class="card-single">
-                    <div class="card-body">
-                        <span class="ti-package"></span>
-                        <div>
-                            <h5>Products Sold</h5>
-                            <h4>8,440</h4>
+                    <div class="card-single">
+                        <div class="card-body">
+                            <span class="ti-user"></span>
+                            <div>
+                                <h5>Active Vendors</h5>
+                                <h4>0</h4>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#">View Vendors</a>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <a href="#">View Details</a>
-                    </div>
-                </div>
 
-                <div class="card-single">
-                    <div class="card-body">
-                        <span class="ti-user"></span>
-                        <div>
-                            <h5>Total Customers</h5>
-                            <h4>12,660</h4>
+                    <div class="card-single">
+                        <div class="card-body">
+                            <span class="ti-calendar"></span>
+                            <div>
+                                <h5>Total Events</h5>
+                                <h4>0</h4>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#">View Events</a>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <a href="#">View Details</a>
-                    </div>
                 </div>
+                
+                <section class="recent">
+                    <div class="activity-grid">
+                        <div class="activity-card">
+                            <h3>Vendor Sales Report</h3>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Vendor</th>
+                                            <th>Product Category</th>
+                                            <th>Units Sold</th>
+                                            <th>Total Sales ($)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Smith's Handcrafted Goods</td>
+                                            <td>Handmade Crafts</td>
+                                            <td>350</td>
+                                            <td>$7,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gourmet Delights</td>
+                                            <td>Food & Beverages</td>
+                                            <td>1,100</td>
+                                            <td>$15,200</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tech Gear Hub</td>
+                                            <td>Electronics</td>
+                                            <td>230</td>
+                                            <td>$22,400</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Home Essentials</td>
+                                            <td>Household Items</td>
+                                            <td>500</td>
+                                            <td>$8,900</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fashion Forward</td>
+                                            <td>Clothing & Accessories</td>
+                                            <td>890</td>
+                                            <td>$13,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Artisan Crafts</td>
+                                            <td>Handmade Crafts</td>
+                                            <td>420</td>
+                                            <td>$8,750</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tech Innovations</td>
+                                            <td>Electronics</td>
+                                            <td>310</td>
+                                            <td>$28,900</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gourmet Kitchen</td>
+                                            <td>Food & Beverages</td>
+                                            <td>950</td>
+                                            <td>$12,800</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Home Decor Plus</td>
+                                            <td>Household Items</td>
+                                            <td>680</td>
+                                            <td>$11,200</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fashion Trends</td>
+                                            <td>Clothing & Accessories</td>
+                                            <td>720</td>
+                                            <td>$10,800</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tech Solutions</td>
+                                            <td>Electronics</td>
+                                            <td>280</td>
+                                            <td>$26,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fresh Delights</td>
+                                            <td>Food & Beverages</td>
+                                            <td>820</td>
+                                            <td>$11,900</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Home Essentials Plus</td>
+                                            <td>Household Items</td>
+                                            <td>550</td>
+                                            <td>$9,800</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Style Studio</td>
+                                            <td>Clothing & Accessories</td>
+                                            <td>640</td>
+                                            <td>$9,600</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="insights">
+                            <div class="insights-content">
+                                <div class="reports">
+                                    <div class="charts">
+                                        <div class="filters">
+                                            <div class="filter-group">
+                                                <label for="dataType">View Data:</label>
+                                                <select id="dataType">
+                                                    <option value="vendors">Vendors</option>
+                                                    <option value="events">Events</option>
+                                                    <option value="registrations">Registrations</option>
+                                                    <option value="products">Products</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label for="viewType">View Type:</label>
+                                                <select id="viewType">
+                                                    <option value="count">Count</option>
+                                                    <option value="distribution">Distribution</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="chart-container">
+                                            <canvas id="reportChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="summary">
+                                    <h3>Summary</h3>
+                                    <div class="summary-stats">
+                                        <div class="stat-item">
+                                            <label>Total Count:</label>
+                                            <span id="totalCount">0</span>
+                                        </div>
+                                        <div class="stat-item" id="typeStats">
+                                            <label>Types:</label>
+                                            <span id="typeCount">0</span>
+                                        </div>
+                                        <div class="stat-item" id="locationStats">
+                                            <label>Locations:</label>
+                                            <span id="locationCount">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-performers">
+                            <h3>Top Performers</h3>
+                            <div class="performers-card">
+                                <div class="performer-section">
+                                    <h4>Best Selling Vendors</h4>
+                                    <ul class="performer-list">
+                                        <li>
+                                            <span class="ti-crown"></span>
+                                            <div>
+                                                <h5>Tech Innovations</h5>
+                                                <small>$28,900 in sales</small>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <span class="ti-crown"></span>
+                                            <div>
+                                                <h5>Tech Solutions</h5>
+                                                <small>$26,500 in sales</small>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <span class="ti-crown"></span>
+                                            <div>
+                                                <h5>Tech Gear Hub</h5>
+                                                <small>$22,400 in sales</small>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="performer-section">
+                                    <h4>Popular Categories</h4>
+                                    <ul class="performer-list">
+                                        <li>
+                                            <span class="ti-star"></span>
+                                            <div>
+                                                <h5>Electronics</h5>
+                                                <small>$78,000 in sales</small>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <span class="ti-star"></span>
+                                            <div>
+                                                <h5>Food & Beverages</h5>
+                                                <small>$40,000 in sales</small>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <span class="ti-star"></span>
+                                            <div>
+                                                <h5>Clothing & Accessories</h5>
+                                                <small>$34,000 in sales</small>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-            
-            <section class="recent">
-                <div class="activity-grid">
-                    <div class="activity-card">
-                        <h3>Vendor Sales Report</h3>
+
+            <!-- Events Content -->
+            <div id="events-content" class="content-section" style="display: none;">
+                <h2 class="dash-title">Events Management</h2>
+                <div class="dash-cards">
+                    <div class="card-single">
+                        <div class="card-body">
+                            <span class="ti-calendar"></span>
+                            <div>
+                                <h5>Total Events</h5>
+                                <h4>0</h4>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#">View All Events</a>
+                        </div>
+                    </div>
+
+                    <div class="card-single">
+                        <div class="card-body">
+                            <span class="ti-ticket"></span>
+                            <div>
+                                <h5>Active Events</h5>
+                                <h4>0</h4>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#">View Active</a>
+                        </div>
+                    </div>
+
+                    <div class="card-single">
+                        <div class="card-body">
+                            <span class="ti-bookmark"></span>
+                            <div>
+                                <h5>Upcoming Events</h5>
+                                <h4>0</h4>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#">View Upcoming</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity-grid events-management-grid">
+                    <!-- Events List -->
+                    <div class="activity-card events-list-card">
+                        <h3>Event Schedule</h3>
                         <div class="table-responsive">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Vendor</th>
-                                        <th>Product Category</th>
-                                        <th>Units Sold</th>
-                                        <th>Total Sales ($)</th>
+                                        <th>Event Name</th>
+                                        <th>Date</th>
+                                        <th>Location</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Smith's Handcrafted Goods</td>
-                                        <td>Handmade Crafts</td>
-                                        <td>350</td>
-                                        <td>$7,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gourmet Delights</td>
-                                        <td>Food & Beverages</td>
-                                        <td>1,100</td>
-                                        <td>$15,200</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tech Gear Hub</td>
-                                        <td>Electronics</td>
-                                        <td>230</td>
-                                        <td>$22,400</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Home Essentials</td>
-                                        <td>Household Items</td>
-                                        <td>500</td>
-                                        <td>$8,900</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fashion Forward</td>
-                                        <td>Clothing & Accessories</td>
-                                        <td>890</td>
-                                        <td>$13,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Artisan Crafts</td>
-                                        <td>Handmade Crafts</td>
-                                        <td>420</td>
-                                        <td>$8,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tech Innovations</td>
-                                        <td>Electronics</td>
-                                        <td>310</td>
-                                        <td>$28,900</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gourmet Kitchen</td>
-                                        <td>Food & Beverages</td>
-                                        <td>950</td>
-                                        <td>$12,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Home Decor Plus</td>
-                                        <td>Household Items</td>
-                                        <td>680</td>
-                                        <td>$11,200</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fashion Trends</td>
-                                        <td>Clothing & Accessories</td>
-                                        <td>720</td>
-                                        <td>$10,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tech Solutions</td>
-                                        <td>Electronics</td>
-                                        <td>280</td>
-                                        <td>$26,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fresh Delights</td>
-                                        <td>Food & Beverages</td>
-                                        <td>820</td>
-                                        <td>$11,900</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Home Essentials Plus</td>
-                                        <td>Household Items</td>
-                                        <td>550</td>
-                                        <td>$9,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Style Studio</td>
-                                        <td>Clothing & Accessories</td>
-                                        <td>640</td>
-                                        <td>$9,600</td>
-                                    </tr>
+                                <tbody id="events-table-body">
+                                    <!-- Events will be dynamically loaded here -->
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="insights">
-                        <div class="insights-content">
-                            <div class="reports">
-                                <div class="charts">
-                                    <div class="filters">
-                                        <div class="filter-group">
-                                            <label for="dataType">View Data:</label>
-                                            <select id="dataType">
-                                                <option value="vendors">Vendors</option>
-                                                <option value="events">Events</option>
-                                                <option value="registrations">Registrations</option>
-                                                <option value="products">Products</option>
-                                            </select>
-                                        </div>
 
-                                        <div class="filter-group">
-                                            <label for="viewType">View Type:</label>
-                                            <select id="viewType">
-                                                <option value="count">Count</option>
-                                                <option value="distribution">Distribution</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="chart-container">
-                                        <canvas id="reportChart"></canvas>
-                                    </div>
-                                </div>
+                    <!-- Event Creation Form -->
+                    <div class="activity-card event-form-card">
+                        <h3>Create New Event</h3>
+                        <form id="event-form" class="event-form">
+                            <div class="form-group">
+                                <label for="event-name">Event Name</label>
+                                <input type="text" id="event-name" name="name" required>
                             </div>
-                            <div class="summary">
-                                <h3>Summary</h3>
-                                <div class="summary-stats">
-                                    <div class="stat-item">
-                                        <label>Total Count:</label>
-                                        <span id="totalCount">0</span>
-                                    </div>
-                                    <div class="stat-item" id="typeStats">
-                                        <label>Types:</label>
-                                        <span id="typeCount">0</span>
-                                    </div>
-                                    <div class="stat-item" id="locationStats">
-                                        <label>Locations:</label>
-                                        <span id="locationCount">0</span>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="event-date">Date</label>
+                                <input type="date" id="event-date" name="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="event-location">Location</label>
+                                <input type="text" id="event-location" name="location" required>
+                            </div>
+                            <button type="submit" class="btn-save">Create Event</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendors Content -->
+            <div id="vendors-content" class="content-section" style="display: none;">
+                <h2 class="dash-title">Vendor Overview</h2>
+                <div class="dash-cards">
+                    <div class="card-single">
+                        <div class="card-body">
+                            <span class="ti-user"></span>
+                            <div>
+                                <h5>Active Vendors</h5>
+                                <h4>0</h4>
                             </div>
                         </div>
+                        <div class="card-footer">
+                            <a href="#">View All</a>
+                        </div>
                     </div>
-                    <div class="top-performers">
-                        <h3>Top Performers</h3>
-                        <div class="performers-card">
-                            <div class="performer-section">
-                                <h4>Best Selling Vendors</h4>
-                                <ul class="performer-list">
-                                    <li>
-                                        <span class="ti-crown"></span>
-                                        <div>
-                                            <h5>Tech Innovations</h5>
-                                            <small>$28,900 in sales</small>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="ti-crown"></span>
-                                        <div>
-                                            <h5>Tech Solutions</h5>
-                                            <small>$26,500 in sales</small>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="ti-crown"></span>
-                                        <div>
-                                            <h5>Tech Gear Hub</h5>
-                                            <small>$22,400 in sales</small>
-                                        </div>
-                                    </li>
-                                </ul>
+
+                    <div class="card-single">
+                        <div class="card-body">
+                            <span class="ti-check-box"></span>
+                            <div>
+                                <h5>Total Vendors</h5>
+                                <h4>0</h4>
                             </div>
-                            <div class="performer-section">
-                                <h4>Popular Categories</h4>
-                                <ul class="performer-list">
-                                    <li>
-                                        <span class="ti-star"></span>
-                                        <div>
-                                            <h5>Electronics</h5>
-                                            <small>$78,000 in sales</small>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="ti-star"></span>
-                                        <div>
-                                            <h5>Food & Beverages</h5>
-                                            <small>$40,000 in sales</small>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="ti-star"></span>
-                                        <div>
-                                            <h5>Clothing & Accessories</h5>
-                                            <small>$34,000 in sales</small>
-                                        </div>
-                                    </li>
-                                </ul>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#">View Active</a>
+                        </div>
+                    </div>
+
+                    <div class="card-single">
+                        <div class="card-body">
+                            <span class="ti-time"></span>
+                            <div>
+                                <h5>Pending Approval</h5>
+                                <h4>0</h4>
                             </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#">Review</a>
                         </div>
                     </div>
                 </div>
-            </section>
+                
+                <div class="activity-grid vendor-directory-grid">
+                    <div class="activity-card vendor-directory-card">
+                        <h3>Vendor Directory</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Vendor Name</th>
+                                        <th>Type</th>
+                                        <th>Address</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Website</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vendors-table-body">
+                                    <!-- Vendors will be dynamically loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Content -->
+            <div id="settings-content" class="content-section" style="display: none;">
+                <h2 class="dash-title">Account Settings</h2>
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>Profile Information</h3>
+                        <form id="profile-form" class="settings-form">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" name="username" value="admin" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" value="admin@ttfa.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone" value="(205) 555-0123">
+                            </div>
+                            <button type="submit" class="btn-save">Save Changes</button>
+                        </form>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>Security Settings</h3>
+                        <form id="security-form" class="settings-form">
+                            <div class="form-group">
+                                <label for="current-password">Current Password</label>
+                                <input type="password" id="current-password" name="current-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">New Password</label>
+                                <input type="password" id="new-password" name="new-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm New Password</label>
+                                <input type="password" id="confirm-password" name="confirm-password">
+                            </div>
+                            <button type="submit" class="btn-save">Update Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
     <!-- Load Chart.js first -->
