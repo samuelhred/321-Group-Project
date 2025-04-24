@@ -1,39 +1,48 @@
 // Check user session on page load
 document.addEventListener('DOMContentLoaded', function() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
     const userRole = localStorage.getItem('user_role');
-    const bookingLink = document.getElementById('booking-link');
+    const username = localStorage.getItem('username');
+    const dashboardLink = document.getElementById('dashboard-link');
     const loginLink = document.getElementById('login-link');
     const logoutLink = document.getElementById('logout-link');
     const logoutButton = document.getElementById('logout-button');
+    const userWelcome = document.getElementById('user-welcome');
 
+    console.log('Login status:', isLoggedIn);
     console.log('Current user role:', userRole);
 
-    if (userRole === 'vendor') {
+    if (isLoggedIn === 'true' && userRole === 'vendor') {
         // Show booking link and logout, hide login link for vendors
-        bookingLink.style.display = 'block';
-        loginLink.style.display = 'none';
-        logoutLink.style.display = 'block';
-    } else if (userRole === 'admin') {
+        if (dashboardLink) dashboardLink.style.display = 'block';
+        if (loginLink) loginLink.style.display = 'none';
+        if (logoutLink) logoutLink.style.display = 'block';
+        if (userWelcome) userWelcome.textContent = `Welcome, ${username || 'Vendor'}!`;
+    } else if (isLoggedIn === 'true' && userRole === 'admin') {
         // Hide booking and login links, show logout for admin
-        bookingLink.style.display = 'none';
-        loginLink.style.display = 'none';
-        logoutLink.style.display = 'block';
+        if (dashboardLink) dashboardLink.style.display = 'none';
+        if (loginLink) loginLink.style.display = 'none';
+        if (logoutLink) logoutLink.style.display = 'block';
+        if (userWelcome) userWelcome.textContent = `Welcome, Admin!`;
     } else {
         // Show login link, hide booking and logout for non-logged in users
-        bookingLink.style.display = 'none';
-        loginLink.style.display = 'block';
-        logoutLink.style.display = 'none';
+        if (dashboardLink) dashboardLink.style.display = 'none';
+        if (loginLink) loginLink.style.display = 'block';
+        if (logoutLink) logoutLink.style.display = 'none';
+        if (userWelcome) userWelcome.textContent = '';
     }
 
     // Add logout functionality
     if (logoutButton) {
         logoutButton.addEventListener('click', function(e) {
             e.preventDefault();
-            // Clear session data
-            localStorage.removeItem('user_id');
+            // Clear all session data
+            localStorage.removeItem('vendorId');
             localStorage.removeItem('user_role');
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
             // Redirect to home page
-            window.location.href = 'index.html';
+            window.location.href = 'home.html';
         });
     }
 });

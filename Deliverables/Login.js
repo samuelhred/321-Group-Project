@@ -31,10 +31,13 @@ async function handleLogin(event) {
             if (vendor) {
                 // Login successful
                 alert("Login successful! Welcome, " + vendor.username + ".");
-                // Store the vendor ID in localStorage
+                // Store the vendor ID and login state in localStorage
                 localStorage.setItem("vendorId", vendor.id);
-                // Redirect to the vendor dashboard
-                window.location.href = "dashboard.html";
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("user_role", "vendor");
+                localStorage.setItem("username", vendor.username);
+                // Redirect to the new registration page
+                window.location.href = "new-registration.html";
             } else {
                 // Login failed
                 alert("Invalid username or password. Please try again.");
