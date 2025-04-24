@@ -215,29 +215,20 @@
                                 <div class="charts">
                                     <div class="filters">
                                         <div class="filter-group">
-                                            <label for="dataType">View by:</label>
+                                            <label for="dataType">View Data:</label>
                                             <select id="dataType">
-                                                <option value="sales">Sales</option>
-                                                <option value="products">Products</option>
                                                 <option value="vendors">Vendors</option>
-                                                <option value="booths">Booths</option>
-                                                <option value="customers">Customers</option>
+                                                <option value="events">Events</option>
+                                                <option value="registrations">Registrations</option>
+                                                <option value="products">Products</option>
                                             </select>
                                         </div>
 
                                         <div class="filter-group">
-                                            <label for="subFilter">View Type:</label>
-                                            <select id="subFilter">
-                                                <!-- Options will be populated dynamically -->
-                                            </select>
-                                        </div>
-
-                                        <div class="filter-group">
-                                            <label for="yearFilter">Year:</label>
-                                            <select id="yearFilter">
-                                                <option value="2024">2024</option>
-                                                <option value="2023">2023</option>
-                                                <option value="2022">2022</option>
+                                            <label for="viewType">View Type:</label>
+                                            <select id="viewType">
+                                                <option value="count">Count</option>
+                                                <option value="distribution">Distribution</option>
                                             </select>
                                         </div>
                                     </div>
@@ -248,27 +239,18 @@
                             </div>
                             <div class="summary">
                                 <h3>Summary</h3>
-                                <div class="summary-card">
-                                    <div class="summary-single">
-                                        <span class="ti-briefcase"></span>
-                                        <div>
-                                            <h5 id="totalVendors">0</h5>
-                                            <small>Total Vendors</small>
-                                        </div>
+                                <div class="summary-stats">
+                                    <div class="stat-item">
+                                        <label>Total Count:</label>
+                                        <span id="totalCount">0</span>
                                     </div>
-                                    <div class="summary-single">
-                                        <span class="ti-layout-grid2"></span>
-                                        <div>
-                                            <h5 id="totalBooths">0</h5>
-                                            <small>Total Booths</small>
-                                        </div>
+                                    <div class="stat-item" id="typeStats">
+                                        <label>Types:</label>
+                                        <span id="typeCount">0</span>
                                     </div>
-                                    <div class="summary-single">
-                                        <span class="ti-tag"></span>
-                                        <div>
-                                            <h5 id="totalCategories">0</h5>
-                                            <small>Product Categories</small>
-                                        </div>
+                                    <div class="stat-item" id="locationStats">
+                                        <label>Locations:</label>
+                                        <span id="locationCount">0</span>
                                     </div>
                                 </div>
                             </div>
@@ -335,7 +317,18 @@
             </section>
         </main>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Load Chart.js first -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <!-- Then load our custom script -->
     <script src="./reports.js"></script>
+    <script>
+        // Verify Chart.js loaded correctly
+        window.addEventListener('load', function() {
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js failed to load');
+                alert('Failed to load chart library. Please refresh the page.');
+            }
+        });
+    </script>
 </body>
 </html>

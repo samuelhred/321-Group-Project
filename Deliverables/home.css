@@ -18,6 +18,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    position: relative;
 }
 
 #events {
@@ -60,18 +61,37 @@ main {
 
 .modal {
     display: none;
-    position: absolute;
-    top: 18.4%;
-    left: calc(66% + 20px);
+    position: fixed;
+    left: calc(50% + 200px); /* Position to the right of events section */
+    top: 50%;
     transform: translateY(-50%);
-    background-color: var(--victory-white);
     background-color: var(--victory-white);
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 2rem auto;
-    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 300px;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--victory-white);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--capstone-gray);
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: var(--crimson-flame);
 }
 
 #book-booth button {
@@ -90,4 +110,46 @@ main {
 
 #book-booth button:hover {
     background-color: var(--roll-tide-red);
+}
+
+.register-btn {
+    background-color: var(--crimson-flame);
+    color: var(--victory-white);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.register-btn:hover {
+    background-color: var(--roll-tide-red);
+}
+
+@media screen and (max-width: 1200px) {
+    #events {
+        width: 40%;
+    }
+    
+    .modal {
+        left: calc(50% + 150px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #events {
+        width: 80%;
+    }
+    
+    .modal {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 300px;
+    }
 }
