@@ -170,10 +170,10 @@ namespace API
 
                 string query = type switch
                 {
-                    0 => "INSERT INTO jaksf1wi5maqj0w4.Vendors (Name, Type, Address, Phone, Email, Website) VALUES (@Name, @Type, @Address, @Phone, @Email, @Website, @Username, @Password);",
+                    0 => "INSERT INTO jaksf1wi5maqj0w4.Vendors (Name, Type, Address, Phone, Email, Website) VALUES (@Name, @Type, @Address, @Phone, @Email, @Website, @Username, @assword);",
                     1 => "INSERT INTO jaksf1wi5maqj0w4.Events (Name, Date, Location, Description) VALUES (@Name, @Date, @Location, @Description);",
-                    2 => "INSERT INTO jaksf1wi5maqj0w4.Products (Name, Price, Description, VendorId) VALUES (@Name, @Price, @Description, @VendorId);",
-                    3 => "INSERT INTO jaksf1wi5maqj0w4.Registration (EventId, UserId, RegistrationDate, Status) VALUES (@EventId, @UserId, @RegistrationDate, @Status);",
+                    2 => "INSERT INTO jaksf1wi5maqj0w4.Products (Name, Description, VendorId) VALUES (@Name, @Description, @VendorId);",
+                    3 => "INSERT INTO jaksf1wi5maqj0w4.Registration (VendorId, ProductId, EventId ) VALUES (@EventId, @ProductId, @VendorId);",
                     _ => throw new ArgumentException("Invalid type")
                 };
 
@@ -212,7 +212,7 @@ namespace API
                         var registration = System.Text.Json.JsonSerializer.Deserialize<Registration>(newItem.ToString());
                         command.Parameters.AddWithValue("@EventId", registration.EventId);
                         command.Parameters.AddWithValue("@VendorId", registration.VendorId);
-                        command.Parameters.AddWithValue("@Status", registration.ProductId);
+                        command.Parameters.AddWithValue("@ProductId", registration.ProductId);
                         break;
                 }
 

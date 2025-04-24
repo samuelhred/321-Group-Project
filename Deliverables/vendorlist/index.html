@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trade Fair Vendors</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body onload="HandleOnLoad()">
+
+  <h1>Trade Fair Vendors</h1>
+
+  <select id="filterSelect">
+    <option value="">-- Select Filter --</option>
+    <option value="name-asc">Name A-Z</option>
+    <option value="name-desc">Name Z-A</option>
+    <option value="type-fashion">Type: Fashion</option>
+    <option value="type-bbq">Type: BBQ</option>
+    <option value="type-art">Type: Art</option>
+    <option value="type-tech">Type: Smart Home</option>
+  </select>
+
+  <div id="vendorGrid"></div>
+
+  <div class="vendor-grid" id="vendorGrid">
+  
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>

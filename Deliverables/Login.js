@@ -31,8 +31,10 @@ async function handleLogin(event) {
             if (vendor) {
                 // Login successful
                 alert("Login successful! Welcome, " + vendor.username + ".");
-                // Redirect to the vendor dashboard or another page
-                window.location.href = "home.html";
+                // Store the vendor ID in localStorage
+                localStorage.setItem("vendorId", vendor.id);
+                // Redirect to the vendor dashboard
+                window.location.href = "dashboard.html";
             } else {
                 // Login failed
                 alert("Invalid username or password. Please try again.");

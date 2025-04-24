@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make New Registration</title>
+    <link rel="stylesheet" href="./home.css">
+    <link rel="stylesheet" href="./layout.css">
+    <link rel="stylesheet" href="./icomoon.css">
+</head>
+<style>
+    #events-section {
+        margin-top: 20px;
+        text-align: center;
+    }
+    
+    #events-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px; /* Space between boxes */
+    }
+    
+    .events-box {
+        font-weight: bold;
+        color: crimson;
+        border: 1px solid crimson;
+        padding: 10px;
+        width: 80%; /* Adjust width as needed */
+        text-align: center;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    /* General container styling */
+    .input-container {
+        margin-top: 20px;
+    }
+
+    /* Input fields styling */
+    .input-field {
+        margin-right: 10px;
+        padding: 10px;
+        width: 100%;
+        max-width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    /* Confirmation button styling */
+    .confirm-button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        max-width: 300px;
+        box-sizing: border-box;
+    }
+
+    /* Confirmation button hover effect */
+    .confirm-button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Main container styling */
+    #main-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    /* Header styling */
+    #header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Confirmation container styling */
+    #confirmation-container {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    /* Paragraph styling inside confirmation container */
+    #confirmation-container p {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #333;
+    }
+</style>
+<body onload="loadEvents()">
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <a href="home.html"><span class="icon-vendor-cart"></span></a>
+            <h1>Tuscaloosa Trade Fair Association</h1>
+        </div>
+        <nav class="header-right">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="vendors.html">View All Vendors</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div id = "header"></div>
+        <section id="events-section">
+            <div id="main-container">
+                <div id="main-container">
+                    <div id="events-container">
+                        <!-- Events will be dynamically loaded here -->
+                    </div>
+                    <button id="submit-button">Submit</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Tuscaloosa Trade Fair Association. All rights reserved.</p>
+    </footer>
+    <script src="./new-registration.js" defer></script>
+</body>
+</html>

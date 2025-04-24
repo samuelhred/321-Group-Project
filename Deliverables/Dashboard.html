@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Dashboard</title>
+    <link rel="stylesheet" href="./home.css">
+    <link rel="stylesheet" href="./layout.css">
+    <link rel="stylesheet" href="./icomoon.css">
+</head>
+<style>/* Header styles */
+    header {
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .header-left {
+        display: flex;
+        align-items: center;
+    }
+    
+    .header-left h1 {
+        margin-left: 10px;
+        font-size: 24px;
+    }
+    
+    .header-right ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+    
+    .header-right ul li {
+        margin-left: 20px;
+    }
+    
+    .header-right ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .header-right ul li a:hover {
+        text-decoration: underline;
+    }
+    
+    /* Footer styles */
+    footer {
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+    .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff; /* Blue button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Add spacing below the button */
+    }
+
+    .btn:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+    </style>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <a href="home.html"><span class="icon-vendor-cart"></span></a>
+            <h1>Tuscaloosa Trade Fair Association</h1>
+        </div>
+        <nav class="header-right">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="vendors.html">View All Vendors</a></li>
+                <li><a href="Login.html" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section id="vendor-info">
+            <!-- Vendor info will be dynamically loaded here -->
+        </section>
+        <section id="registrations-section">
+            <h2>Your Registrations</h2>
+            <button id="new-registration-button" class="btn">Make New Registration</button>
+            <div id="registrations-list">
+                <!-- Registrations will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Tuscaloosa Trade Fair Association. All rights reserved.</p>
+    </footer>
+    <script src="dashboard.js"></script>
+</body>
+</html>
