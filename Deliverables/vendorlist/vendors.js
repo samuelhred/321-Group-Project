@@ -25,20 +25,24 @@ function displayVendors(vendors) {
     }
 
     vendors.forEach(vendor => {
-        const vendorCard = document.createElement('div');
-        vendorCard.className = 'vendor-card';
+        if (vendor.id !== -1) {
+            
         
-        vendorCard.innerHTML = `
-            <div class="vendor-info">
-                <h3>${vendor.name}</h3>
-                <p><strong>Type:</strong> ${vendor.type || 'General Vendor'}</p>
-                <p>${vendor.website || 'No Website'}</p>
-                <p>${vendor.address || 'No Address'}</p>
-                <a href="mailto:${vendor.email || '#'}">Contact Vendor</a>
-            </div>
-        `;
-        
-        vendorGrid.appendChild(vendorCard);
+            const vendorCard = document.createElement('div');
+            vendorCard.className = 'vendor-card';
+            
+            vendorCard.innerHTML = `
+                <div class="vendor-info">
+                    <h3>${vendor.name}</h3>
+                    <p><strong>Type:</strong> ${vendor.type || 'General Vendor'}</p>
+                    <p>${vendor.website || 'No Website'}</p>
+                    <p>${vendor.address || 'No Address'}</p>
+                    <a href="mailto:${vendor.email || '#'}">Contact Vendor</a>
+                </div>
+            `;
+            
+            vendorGrid.appendChild(vendorCard);
+        }
     });
 }
 
