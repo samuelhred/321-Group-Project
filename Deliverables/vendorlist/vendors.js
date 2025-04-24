@@ -15,32 +15,55 @@ async function HandleOnLoad() {
     }
 }
 
-function displayVendors(vendors) {
+async function displayVendors(vendors) {
     const vendorGrid = document.getElementById('vendorGrid');
     vendorGrid.innerHTML = '';
+    const eventResponse = await fetch('http://localhost:5089/api/Data/1');
+    const events = await eventResponse.json();
+    const registrationResponse = await fetch('http://localhost:5089/api/Data/3');
+    const registrations = await registrationResponse.json();
 
     if (vendors.length === 0) {
         vendorGrid.innerHTML = '<p>No vendors found matching your criteria.</p>';
         return;
     }
 
-    vendors.forEach(vendor => {
+        vendors.forEach(vendor => {
         if (vendor.id !== -1) {
-            
-        
+            // Find all events the vendor is registered for
+            const registeredEvents = registrations
+                .filter(registration => registration.vendorId === vendor.id)
+                .map(registration => {
+                    return events.find(event => event.id === registration.eventId);
+                })
+                .filter(event => event !== undefined); // Filter out undefined events
+
+            // Create the vendor card
             const vendorCard = document.createElement('div');
             vendorCard.className = 'vendor-card';
-            
+
+            // Generate the list of event names
+            const eventNames = registeredEvents.length > 0
+                ? registeredEvents.map(event => event.name).join(', ')
+                : 'No Events';
+
+            // Populate the vendor card
             vendorCard.innerHTML = `
                 <div class="vendor-info">
                     <h3>${vendor.name}</h3>
                     <p><strong>Type:</strong> ${vendor.type || 'General Vendor'}</p>
-                    <p>${vendor.website || 'No Website'}</p>
-                    <p>${vendor.address || 'No Address'}</p>
+                    <p><strong>Website: </strong>${
+                        vendor.website 
+                            ? `<a href="${vendor.website}" target="_blank" rel="noopener noreferrer">${vendor.website}</a>` 
+                            : 'No Website'
+                    }</p>
+                    <p><strong>Address: </strong>${vendor.address || 'No Address'}</p>
+                    <p><strong>Attending:</strong> ${eventNames}</p>
                     <a href="mailto:${vendor.email || '#'}">Contact Vendor</a>
                 </div>
             `;
-            
+
+            // Append the vendor card to the grid
             vendorGrid.appendChild(vendorCard);
         }
     });
