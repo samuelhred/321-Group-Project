@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\api\\API.csproj": {}
+    "/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\api\\API.csproj": {
+    "/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\api\\API.csproj",
+        "projectUniqueName": "/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\api\\API.csproj",
-        "packagesPath": "C:\\Users\\corbi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\api\\obj\\",
+        "projectPath": "/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/API.csproj",
+        "packagesPath": "/Users/samredelsheimer/.nuget/packages/",
+        "outputPath": "/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-<<<<<<< HEAD
           "/Users/samredelsheimer/.nuget/NuGet/NuGet.Config"
-=======
-          "C:\\Users\\corbi\\AppData\\Roaming\\NuGet\\NuGet.Config"
->>>>>>> cf151d2e1af0cafa9f6a3d518d9b01abc3f1ba25
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -41,8 +37,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -76,11 +71,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
->>>>>>> cf151d2e1af0cafa9f6a3d518d9b01abc3f1ba25
         }
       }
     }
