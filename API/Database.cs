@@ -173,7 +173,7 @@ namespace API
                     0 => "INSERT INTO jaksf1wi5maqj0w4.Vendors (Name, Type, Address, Phone, Email, Website) VALUES (@Name, @Type, @Address, @Phone, @Email, @Website, @Username, @assword);",
                     1 => "INSERT INTO jaksf1wi5maqj0w4.Events (Name, Date, Location, Description) VALUES (@Name, @Date, @Location, @Description);",
                     2 => "INSERT INTO jaksf1wi5maqj0w4.Products (Name, Description, VendorId) VALUES (@Name, @Description, @VendorId);",
-                    3 => "INSERT INTO jaksf1wi5maqj0w4.Registration (VendorId, ProductId, EventId ) VALUES (@EventId, @ProductId, @VendorId);",
+                    3 => "INSERT INTO jaksf1wi5maqj0w4.Registration (VendorId, ProductId, EventId ) VALUES (@VendorId, @ProductId, @EventId);",
                     _ => throw new ArgumentException("Invalid type")
                 };
 
@@ -297,9 +297,9 @@ namespace API
                 string query = type switch
                 {
                     0 => "DELETE FROM jaksf1wi5maqj0w4.Vendors WHERE id = @Id;",
-                    1 => "DELETE FROM jaksf1wi5maqj0w4.Events WHERE id = @Id;",
-                    2 => "DELETE FROM jaksf1wi5maqj0w4.Products WHERE id = @Id;",
-                    3 => "DELETE FROM jaksf1wi5maqj0w4.Registration WHERE id = @Id;",
+                    1 => "DELETE FROM jaksf1wi5maqj0w4.Events WHERE EventId = @Id;",
+                    2 => "DELETE FROM jaksf1wi5maqj0w4.Products WHERE ProductId = @Id;",
+                    3 => "DELETE FROM jaksf1wi5maqj0w4.Registration WHERE RegistrationId = @Id;",
                     _ => throw new ArgumentException("Invalid type")
                 };
 

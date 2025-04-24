@@ -93,7 +93,7 @@ async function loadEvents() {
                     confirmButton.addEventListener("click", () => {
                         handleProductSubmission(event.name, textBox.value.trim(), namebox.value.trim(), parseInt(vendorId));
                             // Clear the screen by replacing the content of #main-container
-                            const mainContainer = document.getElementById("main-container");
+                            let mainContainer = document.getElementById("main-container");
                             mainContainer.innerHTML = ""; // Clear all content
                             eventsContainer.innerHTML = ""; // Clear events container
                             header.innerHTML = `<h2>Registration Checkout</h2>`; // Clear header
@@ -224,6 +224,9 @@ async function loadEvents() {
                             paymentForm.appendChild(zipInput);
                             paymentForm.appendChild(document.createElement("br"));
                             paymentForm.appendChild(payButton);
+                            // Append the payment form to the main container
+                            mainContainer.appendChild(paymentForm);
+
 
                             paymentForm.addEventListener("submit", (e) => {
                                 e.preventDefault(); // Prevent form submission
@@ -256,14 +259,8 @@ async function loadEvents() {
                                     alert("Invalid ZIP code. It must be 5 digits.");
                                     return;
                                 }
-                                registrationSubmit(event.id, namebox.value.trim());
+                                registrationSubmit(event.id, namebox.value.trim(),parseInt(vendorId));
                                 alert("Payment successful! Thank you for registering.");
-                            });
-
-                            payButton.addEventListener("click", async () => {
-                                // Call the registrationSubmit function
-                                // Clear the screen by replacing the content of #main-container
-                                const mainContainer = document.getElementById("main-container");
                                 mainContainer.innerHTML = "Registration Confirmed!"; // Clear all content
                             });
 
@@ -369,12 +366,12 @@ function validateExpirationDate(expirationDate) {
     return true;
 }
 
-async function registrationSubmit(eventid, productName) {
+async function registrationSubmit(eventid, productName, vendorId) {
     // Get the product data from the API
     const productResponse = await fetch("http://localhost:5089/api/Data/2");
     const productData = await productResponse.json();
 
-    let productId = null; // Use let instead of const
+    let productId = -1; // Use let instead of const
     productData.forEach((product) => {
         if (productName === product.name) {
             productId = product.id; // Reassignment is now allowed
@@ -382,15 +379,9 @@ async function registrationSubmit(eventid, productName) {
         }
     });
 
-    const vendorId = localStorage.getItem("vendorId");
-    if (!vendorId) {
-        console.error("Vendor ID not found in localStorage.");
-        return null;
-    }
-
     const eventId = eventid;
     const registration = {
-        VendorId: parseInt(vendorId), // Fixed Int.parse to parseInt
+        VendorId: vendorId, // Fixed Int.parse to parseInt
         EventId: parseInt(eventId),  // Fixed Int.parse to parseInt
         ProductId: parseInt(productId)  || null, // Fixed Int.parse to parseInt
     };

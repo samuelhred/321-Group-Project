@@ -74,6 +74,46 @@
     .btn:hover {
         background-color: #0056b3; /* Darker blue on hover */
     }
+    .registration-box {
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px; /* Add padding inside the box */
+    margin-bottom: 15px; /* Add spacing between boxes */
+    background-color: #f9f9f9; /* Light grey background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+    .btn-remove {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background-color: #dc3545; /* Red button */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px; /* Add spacing above the button */
+    }
+    
+    .btn-remove:hover {
+        background-color: #a71d2a; /* Darker red on hover */
+    }
+    .product-box {
+        border: 1px solid #ccc; /* Light grey border */
+        border-radius: 5px; /* Rounded corners */
+        padding: 15px; /* Add padding inside the box */
+        margin-bottom: 15px; /* Add spacing between boxes */
+        background-color: #f9f9f9; /* Light grey background */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+    body {
+        padding-bottom: 50px; /* Add padding at the bottom of the page */
+    }
+    
+    #products-section {
+        margin-bottom: 50px; /* Add extra spacing below the products section */
+    }
     </style>
 <body>
     <!-- Header -->
@@ -101,6 +141,10 @@
             <button id="new-registration-button" class="btn">Make New Registration</button>
             <div id="registrations-list">
                 <!-- Registrations will be dynamically loaded here -->
+            </div>
+            <div id="products-section">
+                <h2>All Products</h2>
+                <div id="products-list"></div>
             </div>
         </section>
     </main>

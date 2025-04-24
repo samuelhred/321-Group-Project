@@ -14,11 +14,7 @@
         "outputPath": "/Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-<<<<<<< HEAD
           "/Users/samredelsheimer/.nuget/NuGet/NuGet.Config"
-=======
-          "C:\\Users\\corbi\\AppData\\Roaming\\NuGet\\NuGet.Config"
->>>>>>> bb201e3bf633b139d57a7d74591613b197495fad
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -75,11 +71,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
->>>>>>> bb201e3bf633b139d57a7d74591613b197495fad
         }
       }
     }

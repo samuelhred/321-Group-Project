@@ -116,6 +116,42 @@
         .login-link a:hover {
             text-decoration: underline;
         }
+        .form-input, 
+        select {
+            width: 100%; /* Make the dropdown take the full width of its container */
+            padding: 10px; /* Add padding for better appearance */
+            margin-top: 5px; /* Add spacing above the element */
+            margin-bottom: 15px; /* Add spacing below the element */
+            border: 1px solid #ccc; /* Add a border */
+            border-radius: 5px; /* Round the corners */
+            font-size: 16px; /* Match the font size of other inputs */
+            box-sizing: border-box; /* Ensure padding and border are included in the width */
+        }
+
+        /* Label styles */
+        .form-label {
+            display: block; /* Ensure labels are on their own line */
+            margin-bottom: 5px; /* Add spacing below the label */
+            font-weight: bold; /* Make labels bold */
+        }
+
+        select {
+            appearance: none; /* Remove default browser styles for dropdowns */
+            background-color: #fff; /* Set background color */
+            cursor: pointer; /* Change cursor to pointer for dropdowns */
+        }
+
+        /* Optional: Add a hover effect for the dropdown */
+        select:hover {
+            border-color: #007bff; /* Change border color on hover */
+        }
+
+        /* Optional: Add focus styles for accessibility */
+        select:focus {
+            outline: none; /* Remove default outline */
+            border-color: #007bff; /* Highlight border on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow */
+        }
     </style>
 </head>
 <body>
@@ -147,8 +183,17 @@
                             <input type="text" id="name" name="name" class="form-input" placeholder="Enter vendor name" required>
                         </div>
                         <div class="form-group">
-                            <label for="type" class="form-label">Vendor Type</label>
-                            <input type="text" id="type" name="type" class="form-input" placeholder="Enter vendor type (e.g., Food, Crafts)" required>
+                            <label for="type" class="form-label">Type</label>
+                            <select id="type" name="type" class="form-input">
+                                <option value="Handmade Crafts">Handmade Crafts</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Clothing and Textiles">Clothing and Textiles</option>
+                                <option value="Household Tools">Household Tools</option>
+                                <option value="Food and Beverages">Food and Beverages</option>
+                                <option value="Manufacturing">Manufacturing</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="address" class="form-label">Address</label>
