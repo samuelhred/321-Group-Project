@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UPH6s67CfVM=",
+  "dgSpecHash": "sL1EgC2qVmA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\corbi\\OneDrive\\Desktop\\SCHOOL\\3_JUNIOR_JOURNEY\\SEMESTER_2\\MIS 321\\Group Project\\321-Group-Project\\api\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\corbi\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\corbi\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",

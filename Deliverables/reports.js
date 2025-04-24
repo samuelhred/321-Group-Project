@@ -520,7 +520,7 @@ async function loadVendors() {
         vendors.forEach(vendor => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${vendor.username || 'N/A'}</td>
+                <td>${vendor.name || 'N/A'}</td>
                 <td>${vendor.type || 'N/A'}</td>
                 <td>${vendor.address || 'N/A'}</td>
                 <td>${vendor.phone || 'N/A'}</td>
