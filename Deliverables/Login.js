@@ -37,7 +37,7 @@ async function handleLogin(event) {
                 localStorage.setItem("user_role", "vendor");
                 localStorage.setItem("username", vendor.username);
                 // Redirect to the new registration page
-                window.location.href = "new-registration.html";
+                window.location.href = "Dashboard.html";
             } else {
                 // Login failed
                 alert("Invalid username or password. Please try again.");

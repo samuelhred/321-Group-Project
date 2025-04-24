@@ -92,9 +92,20 @@ function toggleModal(eventElement) {
 }
 
 function handleRegister(eventTitle) {
-    // You can add registration logic here
-    console.log(`Registering for event: ${eventTitle}`);
-    // For now, just close the modal
+    // Check login status from localStorage
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const userRole = localStorage.getItem('user_role');
+
+    if (isLoggedIn === 'true' && userRole === 'vendor') {
+        // If logged in as vendor, redirect to new registration page
+        window.location.href = 'new-registration.html';
+    } else {
+        // If not logged in, show alert and redirect to login page
+        alert("You must be logged in as a vendor to register for events. Redirecting to login page...");
+        window.location.href = 'login.html';
+    }
+    
+    // Close the modal before redirecting
     closeModal();
 }
 
