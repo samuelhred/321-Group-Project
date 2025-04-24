@@ -6,6 +6,7 @@ async function HandleOnLoad() {
         allVendors = await response.json();
         displayVendors(allVendors);
         setupSearchAndFilter();
+        populateVendorTypes();
     } catch (error) {
         console.error('Error loading vendors:', error);
         document.getElementById('vendorGrid').innerHTML = '<p>Failed to load vendors. Please try again later.</p>';
@@ -28,7 +29,7 @@ function displayVendors(vendors) {
         vendorCard.innerHTML = `
             <div class="vendor-info">
                 <h3>${vendor.name}</h3>
-                <p>${vendor.type || 'General Vendor'}</p>
+                <p><strong>Type:</strong> ${vendor.type || 'General Vendor'}</p>
                 <p>${vendor.website || 'No Website'}</p>
                 <p>${vendor.address || 'No Address'}</p>
                 <a href="mailto:${vendor.email || '#'}">Contact Vendor</a>
@@ -39,46 +40,84 @@ function displayVendors(vendors) {
     });
 }
 
-function setupSearchAndFilter() {
-    const searchInput = document.getElementById('searchInput');
-    const filterSelect = document.getElementById('filterSelect');
-
-    // Add event listeners for both search and filter
-    searchInput.addEventListener('input', () => {
-        applySearchAndFilter();
+function populateVendorTypes() {
+    const typeSelect = document.getElementById('typeSelect');
+    
+    // Create a map to store unique types (case-insensitive)
+    const typeMap = new Map();
+    
+    // Collect unique types with their original casing
+    allVendors.forEach(vendor => {
+        if (vendor.type) {
+            const lowerType = vendor.type.toLowerCase();
+            // Only store the first occurrence of each type (preserving original casing)
+            if (!typeMap.has(lowerType)) {
+                typeMap.set(lowerType, vendor.type);
+            }
+        }
     });
-
-    filterSelect.addEventListener('change', () => {
-        applySearchAndFilter();
+    
+    // Convert to array and sort alphabetically
+    const sortedTypes = Array.from(typeMap.values()).sort((a, b) => 
+        a.toLowerCase().localeCompare(b.toLowerCase())
+    );
+    
+    // Clear existing options except the first one
+    while (typeSelect.options.length > 1) {
+        typeSelect.remove(1);
+    }
+    
+    // Add type options to select
+    sortedTypes.forEach(type => {
+        const option = document.createElement('option');
+        option.value = type.toLowerCase();
+        option.textContent = type;
+        typeSelect.appendChild(option);
     });
 }
 
-function applySearchAndFilter() {
+function setupSearchAndFilter() {
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const typeSelect = document.getElementById('typeSelect');
+
+    // Add event listeners
+    searchInput.addEventListener('input', applyFilters);
+    sortSelect.addEventListener('change', applyFilters);
+    typeSelect.addEventListener('change', applyFilters);
+}
+
+function applyFilters() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const filterValue = document.getElementById('filterSelect').value;
+    const sortValue = document.getElementById('sortSelect').value;
+    const selectedType = document.getElementById('typeSelect').value.toLowerCase();
 
     let filteredVendors = [...allVendors];
 
     // Apply search
     if (searchTerm) {
         filteredVendors = filteredVendors.filter(vendor => 
-            vendor.name.toLowerCase().includes(searchTerm) ||
+            (vendor.name && vendor.name.toLowerCase().includes(searchTerm)) ||
             (vendor.description && vendor.description.toLowerCase().includes(searchTerm)) ||
-            (vendor.type && vendor.type.toLowerCase().includes(searchTerm))
+            (vendor.type && vendor.type.toLowerCase().includes(searchTerm)) ||
+            (vendor.website && vendor.website.toLowerCase().includes(searchTerm)) ||
+            (vendor.address && vendor.address.toLowerCase().includes(searchTerm))
         );
     }
 
-    // Apply filter
-    if (filterValue) {
-        if (filterValue === 'name-asc') {
-            filteredVendors.sort((a, b) => a.name.localeCompare(b.name));
-        } else if (filterValue === 'name-desc') {
-            filteredVendors.sort((a, b) => b.name.localeCompare(a.name));
-        } else if (filterValue.startsWith('type-')) {
-            const type = filterValue.replace('type-', '');
-            filteredVendors = filteredVendors.filter(vendor => 
-                vendor.type && vendor.type.toLowerCase() === type.toLowerCase()
-            );
+    // Apply type filter
+    if (selectedType) {
+        filteredVendors = filteredVendors.filter(vendor => 
+            vendor.type && vendor.type.toLowerCase() === selectedType
+        );
+    }
+
+    // Apply sorting
+    if (sortValue) {
+        if (sortValue === 'name-asc') {
+            filteredVendors.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+        } else if (sortValue === 'name-desc') {
+            filteredVendors.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
         }
     }
 

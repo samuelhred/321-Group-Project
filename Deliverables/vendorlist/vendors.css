@@ -49,6 +49,11 @@ body {
     box-shadow: 0 0 0 2px rgba(158, 27, 50, 0.1);
 }
 
+.filter-section {
+    display: flex;
+    gap: 10px;
+}
+
 .filter-dropdown {
     padding: 8px 15px;
     border: 1px solid var(--chimes-gray);
@@ -57,7 +62,7 @@ body {
     background-color: var(--victory-white);
     color: var(--pachyderm);
     cursor: pointer;
-    min-width: 150px;
+    min-width: 120px;
 }
 
 .filter-dropdown:focus {
@@ -156,6 +161,16 @@ body {
     .filter-dropdown {
         width: 100%;
         max-width: 400px;
+    }
+
+    .filter-section {
+        width: 100%;
+        max-width: 400px;
+        gap: 10px;
+    }
+
+    .filter-dropdown {
+        flex: 1;
     }
 }
 
