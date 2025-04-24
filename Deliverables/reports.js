@@ -175,8 +175,8 @@ async function renderChart(type = 'vendors', view = 'count') {
         }
 
         console.log('Setting up chart configuration');
-        const colors = colorSchemes[type];
-        
+    const colors = colorSchemes[type];
+
         // Destroy existing chart if it exists
         if (chartInstance) {
             console.log('Destroying existing chart');
@@ -194,17 +194,17 @@ async function renderChart(type = 'vendors', view = 'count') {
                 switch (type) {
                     case 'vendors':
                         chartLabel = 'Vendors by Type';
-                        break;
+            break;
                     case 'events':
                         chartLabel = 'Events by Location';
-                        break;
+            break;
                     case 'products':
                         chartLabel = 'Product Count';
-                        break;
+            break;
                     case 'registrations':
                         chartLabel = 'Registrations by Event';
-                        break;
-                }
+            break;
+    }
                 chartData = {
                     labels: processedData.labels,
                     datasets: [{
@@ -220,13 +220,13 @@ async function renderChart(type = 'vendors', view = 'count') {
                 chartType = 'pie';
                 chartData = {
                     labels: processedData.labels,
-                    datasets: [{
+            datasets: [{
                         data: processedData.values,
                         backgroundColor: processedData.labels.map((_, index) => {
                             // Cycle through the distribution colors array
                             return colors.distribution[index % colors.distribution.length];
                         }),
-                        borderColor: colors.border,
+                borderColor: colors.border,
                         borderWidth: 1
                     }]
                 };

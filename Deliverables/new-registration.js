@@ -1,3 +1,18 @@
+// Check login state before loading anything
+document.addEventListener('DOMContentLoaded', function() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const vendorId = localStorage.getItem("vendorId");
+    
+    if (!isLoggedIn || !vendorId) {
+        alert("Please log in to access this page.");
+        window.location.href = "login.html";
+        return;
+    }
+    
+    // If logged in, load the events
+    loadEvents();
+});
+
 async function loadEvents() {
         const vendorId = localStorage.getItem("vendorId");
         if (!vendorId) {
