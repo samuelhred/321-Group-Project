@@ -160,17 +160,32 @@ async function processData(data, type) {
             };
 
         case 'products':
-            // Show products by name with their counts
-            const productCounts = {};
-            data.forEach(p => {
-                const name = p.name || p.Name || 'Unnamed Product';
-                productCounts[name] = (productCounts[name] || 0) + 1;
-            });
-            return {
-                labels: Object.keys(productCounts),
-                values: Object.values(productCounts),
-                vendorIds: data.map(p => p.vendorId || p.VendorId)
-            };
+            try {
+                // Fetch vendors to get their types
+                const vendorsResponse = await fetch(`${API_BASE_URL}/0`);
+                const vendors = await vendorsResponse.json();
+                const vendorTypeMap = new Map(vendors.map(v => [v.id, v.type || 'Unspecified']));
+
+                // Group products by vendor type
+                const productsByVendorType = {};
+                data.forEach(p => {
+                    const vendorType = vendorTypeMap.get(p.vendorId) || 'Unspecified';
+                    productsByVendorType[vendorType] = (productsByVendorType[vendorType] || 0) + 1;
+                });
+
+                // Sort by count (descending)
+                const sortedProducts = Object.entries(productsByVendorType)
+                    .sort(([,a], [,b]) => b - a);
+
+                return {
+                    labels: sortedProducts.map(([type]) => type),
+                    values: sortedProducts.map(([,count]) => count),
+                    title: 'Products by Vendor Type'
+                };
+            } catch (error) {
+                console.error('Error processing product data:', error);
+                return null;
+            }
 
         default:
             return null;
@@ -367,6 +382,7 @@ function loadContent(section) {
     switch(section) {
         case 'reports':
             updateDashboardCards();
+            loadVendorRegistrationReports();
             renderChart('vendors', 'count');
             break;
         case 'events':
@@ -623,78 +639,140 @@ async function updateDashboardCards() {
     }
 }
 
-/*
- * Future MySQL Integration for 2025 Booth Data
- * This section will be implemented when the vendor registration system is complete
- * 
- * Current Database Schema Reference:
- * 
- * TABLE: vendors
- * - vendor_id (PK)
- * - vendor_name
- * - time_open (when vendor is available at event)
- * - registration_date (when vendor signed up)
- * - other vendor details...
- * 
- * TABLE: booths
- * - booth_id (PK)
- * - booth_size
- * - vendor_id (FK -> vendors.vendor_id)
- * - booking_date (when booth was assigned)
- * - other booth details...
- * 
- * Example API Endpoint:
- * GET /api/booth-registrations/2025
- * Response: {
- *     monthly: {
- *         registrations: [1, 3, 5, 2, ...], // New vendors per month
- *         boothAssignments: [0, 2, 4, 1, ...], // Booths assigned per month
- *         totalVendors: [1, 4, 9, 11, ...] // Cumulative vendors
- *     },
- *     boothSizes: {
- *         'Small (10x10)': count,
- *         'Medium (15x15)': count,
- *         'Large (20x20)': count
- *     },
- *     vendorTimes: {
- *         'Morning (8am-12pm)': count,
- *         'Afternoon (12pm-5pm)': count,
- *         'Evening (5pm-9pm)': count,
- *         'All Day': count
- *     }
- * }
- */
+// Load vendor registration reports
+async function loadVendorRegistrationReports() {
+    try {
+        // Fetch all necessary data
+        const registrationsResponse = await fetch(`${API_BASE_URL}/3`);
+        const vendorsResponse = await fetch(`${API_BASE_URL}/0`);
+        const eventsResponse = await fetch(`${API_BASE_URL}/1`);
+        const productsResponse = await fetch(`${API_BASE_URL}/2`);
 
-/*
- * Future Implementation:
- * 
- * async function fetch2025BoothData() {
- *     try {
- *         const response = await fetch('/api/booth-registrations/2025');
- *         const data = await response.json();
- *         
- *         // Update 2025 data in reportData
- *         reportData.vendors['2025'] = {
- *             total: data.monthly.totalVendors[data.monthly.totalVendors.length - 1], // Last month's total
- *             byMonth: data.monthly,
- *             boothSizes: data.boothSizes,
- *             vendorTimes: data.vendorTimes
- *         };
- *         
- *         // Update chart if 2025 is selected
- *         if (document.getElementById('yearFilter').value === '2025') {
- *             renderChart();
- *         }
- *     } catch (error) {
- *         console.error('Error fetching 2025 booth data:', error);
- *     }
- * }
- * 
- * // Call this when the page loads and 2025 is selected
- * document.addEventListener('DOMContentLoaded', () => {
- *     if (document.getElementById('yearFilter').value === '2025') {
- *         fetch2025BoothData();
- *     }
- * });
- */
+        if (!registrationsResponse.ok || !vendorsResponse.ok || !eventsResponse.ok || !productsResponse.ok) {
+            throw new Error('Failed to fetch report data');
+        }
 
+        const registrations = await registrationsResponse.json();
+        const vendors = (await vendorsResponse.json()).filter(v => v.id !== -1); // Exclude admin
+        const events = await eventsResponse.json();
+        const products = await productsResponse.json();
+
+        // Create a map of event registrations
+        const eventRegistrations = new Map();
+        events.forEach(event => {
+            eventRegistrations.set(event.id, {
+                eventName: event.name,
+                location: event.location,
+                date: new Date(event.date).toLocaleDateString(),
+                vendorCount: 0,
+                productCount: 0
+            });
+        });
+
+        // Count registrations and products per event
+        registrations.forEach(reg => {
+            if (eventRegistrations.has(reg.eventId)) {
+                const eventData = eventRegistrations.get(reg.eventId);
+                eventData.vendorCount++;
+                if (reg.productId) eventData.productCount++;
+            }
+        });
+
+        // Update the table
+        const tbody = document.querySelector('.activity-card table tbody');
+        if (!tbody) return;
+
+        tbody.innerHTML = '';
+        eventRegistrations.forEach(data => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${data.eventName}</td>
+                <td>${data.location}</td>
+                <td>${data.date}</td>
+                <td>${data.vendorCount}</td>
+                <td>${data.productCount}</td>
+            `;
+            tbody.appendChild(row);
+        });
+
+        // Update top performers section
+        updateTopPerformers(vendors, registrations, events, products);
+    } catch (error) {
+        console.error('Error loading registration reports:', error);
+    }
+}
+
+// Update top performers section
+function updateTopPerformers(vendors, registrations, events, products) {
+    // Count registrations per vendor
+    const vendorStats = new Map();
+    vendors.forEach(vendor => {
+        vendorStats.set(vendor.id, {
+            name: vendor.name || vendor.username,
+            type: vendor.type || 'General',
+            registrationCount: 0,
+            productCount: 0
+        });
+    });
+
+    // Calculate statistics
+    registrations.forEach(reg => {
+        if (vendorStats.has(reg.vendorId)) {
+            const stats = vendorStats.get(reg.vendorId);
+            stats.registrationCount++;
+        }
+    });
+
+    products.forEach(product => {
+        if (vendorStats.has(product.vendorId)) {
+            const stats = vendorStats.get(product.vendorId);
+            stats.productCount++;
+        }
+    });
+
+    // Sort vendors by registration count
+    const sortedVendors = Array.from(vendorStats.values())
+        .sort((a, b) => b.registrationCount - a.registrationCount);
+
+    // Group vendors by type
+    const vendorsByType = {};
+    vendors.forEach(vendor => {
+        const type = vendor.type || 'General';
+        if (!vendorsByType[type]) {
+            vendorsByType[type] = 0;
+        }
+        vendorsByType[type]++;
+    });
+
+    // Sort vendor types by count
+    const sortedTypes = Object.entries(vendorsByType)
+        .sort(([,a], [,b]) => b - a);
+
+    // Update the UI
+    const topVendorsList = document.querySelector('.performer-section:first-child .performer-list');
+    const topTypesList = document.querySelector('.performer-section:last-child .performer-list');
+
+    if (topVendorsList) {
+        topVendorsList.innerHTML = sortedVendors.slice(0, 3).map(vendor => `
+            <li>
+                <span class="ti-crown"></span>
+                <div>
+                    <h5>${vendor.name}</h5>
+                    <small>${vendor.registrationCount} events, ${vendor.productCount} products</small>
+                </div>
+            </li>
+        `).join('');
+    }
+
+    if (topTypesList) {
+        topTypesList.innerHTML = sortedTypes.slice(0, 3).map(([type, count]) => `
+            <li>
+                <span class="ti-star"></span>
+                <div>
+                    <h5>${type}</h5>
+                    <small>${count} vendors</small>
+                </div>
+            </li>
+        `).join('');
+    }
+}
