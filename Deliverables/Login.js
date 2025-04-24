@@ -6,7 +6,18 @@ async function handleLogin(event) {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    // API endpoint for fetching vendors
+    // Check for admin credentials first
+    if (username === "admin" && password === "admin") {
+        // Admin login successful
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("user_role", "admin");
+        localStorage.setItem("username", "admin");
+        alert("Login successful! Welcome, Admin.");
+        window.location.href = "reports.html";
+        return;
+    }
+
+    // If not admin, proceed with vendor login
     const link = "http://localhost:5089/api/Data/0"; // Replace with your actual API endpoint
 
     try {
