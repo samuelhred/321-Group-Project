@@ -34,3 +34,42 @@
 /Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.pdb
 /Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/API.genruntimeconfig.cache
 /Users/samredelsheimer/Documents/GROUPPROJ/321-Group-Project/API/obj/Debug/net8.0/ref/API.dll
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\appsettings.json
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\API.staticwebassets.endpoints.json
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\API.exe
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\API.deps.json
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\API.runtimeconfig.json
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\API.dll
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\API.pdb
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\MySqlConnector.dll
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\API.csproj.AssemblyReference.cache
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\API.AssemblyInfoInputs.cache
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\API.AssemblyInfo.cs
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\API.csproj.CoreCompileInputs.cache
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\API.sourcelink.json
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\scopedcss\bundle\API.styles.css
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\staticwebassets\msbuild.API.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\staticwebassets\msbuild.API.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\staticwebassets\msbuild.build.API.props
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.API.props
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.API.props
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\API.csproj.Up2Date
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\API.dll
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\refint\API.dll
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\API.pdb
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\API.genruntimeconfig.cache
+C:\Users\corbi\OneDrive\Desktop\SCHOOL\3_JUNIOR_JOURNEY\SEMESTER_2\MIS 321\Group Project\321-Group-Project\api\obj\Debug\net8.0\ref\API.dll

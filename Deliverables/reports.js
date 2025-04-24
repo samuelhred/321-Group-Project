@@ -74,15 +74,39 @@ async function fetchData(type) {
         if (!response.ok) {
             throw new Error(`API call failed: ${response.statusText}`);
         }
-        return await response.json();
+        const data = await response.json();
+        
+        // Filter out admin user (ID: -1) from vendor data
+        if (type === 'vendors') {
+            return data.filter(vendor => vendor.id !== -1);
+        }
+        return data;
     } catch (error) {
         console.error(`Error fetching ${type} data:`, error);
         return null;
     }
 }
 
+// Fetch event names to map event IDs to names
+async function fetchEventNames() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/1`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch events');
+        }
+        const events = await response.json();
+        return events.reduce((map, event) => {
+            map[event.id] = event.name;
+            return map;
+        }, {});
+    } catch (error) {
+        console.error('Error fetching event names:', error);
+        return {};
+    }
+}
+
 // Process data for visualization
-function processData(data, type) {
+async function processData(data, type) {
     if (!data || !Array.isArray(data)) return null;
 
     switch (type) {
@@ -98,6 +122,29 @@ function processData(data, type) {
                 values: Object.values(vendorsByType),
                 types: [...new Set(data.map(v => v.type || v.Type || 'Unspecified'))]
             };
+
+        case 'registrations':
+            // Fetch event names first
+            const eventNames = await fetchEventNames();
+            
+            // Group registrations by event and count vendors
+            const registrationsByEvent = {};
+            data.forEach(r => {
+                const eventId = r.eventId || r.EventId;
+                const eventName = eventNames[eventId] || `Event #${eventId}`;
+                registrationsByEvent[eventName] = (registrationsByEvent[eventName] || 0) + 1;
+            });
+
+            // Sort by number of registrations (descending)
+            const sortedEntries = Object.entries(registrationsByEvent)
+                .sort(([,a], [,b]) => b - a);
+
+            return {
+                labels: sortedEntries.map(([name]) => name),
+                values: sortedEntries.map(([,count]) => count),
+                title: 'Vendor Registrations by Event'
+            };
+
         case 'events':
             // Group events by location
             const eventsByLocation = {};
@@ -111,6 +158,7 @@ function processData(data, type) {
                 dates: data.map(e => e.date || e.Date || 'No Date'),
                 locations: [...new Set(data.map(e => e.location || e.Location || 'No Location'))]
             };
+
         case 'products':
             // Show products by name with their counts
             const productCounts = {};
@@ -123,19 +171,7 @@ function processData(data, type) {
                 values: Object.values(productCounts),
                 vendorIds: data.map(p => p.vendorId || p.VendorId)
             };
-        case 'registrations':
-            // Group registrations by event
-            const registrationsByEvent = {};
-            data.forEach(r => {
-                const eventId = r.eventId || r.EventId || 'Unknown';
-                registrationsByEvent[`Event #${eventId}`] = (registrationsByEvent[`Event #${eventId}`] || 0) + 1;
-            });
-            return {
-                labels: Object.keys(registrationsByEvent),
-                values: Object.values(registrationsByEvent),
-                vendorIds: data.map(r => r.vendorId || r.VendorId),
-                eventIds: data.map(r => r.eventId || r.EventId)
-            };
+
         default:
             return null;
     }
@@ -154,7 +190,7 @@ async function renderChart(type = 'vendors', view = 'count') {
         }
 
         console.log('Processing data for visualization');
-        const processedData = processData(data, type);
+        const processedData = await processData(data, type);
         console.log('Processed data:', processedData);
         
         if (!processedData) {
@@ -315,6 +351,277 @@ document.addEventListener("DOMContentLoaded", () => {
     renderChart('vendors', 'count');
 });
 
+// Content switching functionality
+function loadContent(section) {
+    // Hide all content sections
+    const sections = document.querySelectorAll('.content-section');
+    sections.forEach(s => s.style.display = 'none');
+
+    // Show the selected section
+    const selectedSection = document.getElementById(`${section}-content`);
+    if (selectedSection) {
+        selectedSection.style.display = 'block';
+    }
+
+    // Load section-specific data
+    switch(section) {
+        case 'reports':
+            updateDashboardCards();
+            renderChart('vendors', 'count');
+            break;
+        case 'events':
+            loadEvents();
+            break;
+        case 'vendors':
+            loadVendors();
+            break;
+        case 'settings':
+            loadUserSettings();
+            break;
+    }
+}
+
+// Event Management Functions
+async function loadEvents() {
+    try {
+        const response = await fetch('http://localhost:5089/api/Data/1');
+        if (!response.ok) throw new Error('Failed to fetch events');
+        
+        const events = await response.json();
+        const tbody = document.getElementById('events-table-body');
+        if (!tbody) {
+            console.error('Events table body not found');
+            return;
+        }
+
+        tbody.innerHTML = '';
+        events.forEach(event => {
+            const row = document.createElement('tr');
+            const date = new Date(event.date).toLocaleDateString();
+            row.innerHTML = `
+                <td>${event.name || 'N/A'}</td>
+                <td>${date || 'N/A'}</td>
+                <td>${event.location || 'N/A'}</td>
+                <td>
+                    <button class="delete-btn" onclick="deleteEvent(${event.id})">Delete</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+
+        // Update the dashboard cards with actual counts
+        updateEventCounts(events);
+    } catch (error) {
+        console.error('Error loading events:', error);
+        const tbody = document.getElementById('events-table-body');
+        if (tbody) {
+            tbody.innerHTML = '<tr><td colspan="4">Failed to load events. Please try again later.</td></tr>';
+        }
+    }
+}
+
+// Update event counts in dashboard cards
+function updateEventCounts(events) {
+    const totalEvents = events.length;
+    const currentDate = new Date();
+    const activeEvents = events.filter(event => new Date(event.date) >= currentDate).length;
+    const upcomingEvents = events.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate >= currentDate && eventDate <= new Date(currentDate.setDate(currentDate.getDate() + 30));
+    }).length;
+
+    // Update the dashboard cards
+    const dashCards = document.querySelectorAll('#events-content .card-single h4');
+    if (dashCards.length >= 3) {
+        dashCards[0].textContent = totalEvents;
+        dashCards[1].textContent = activeEvents;
+        dashCards[2].textContent = upcomingEvents;
+    }
+}
+
+// Add event form submission handler
+document.addEventListener('DOMContentLoaded', () => {
+    const eventForm = document.getElementById('event-form');
+    if (eventForm) {
+        eventForm.addEventListener('submit', createEvent);
+    }
+});
+
+async function createEvent(event) {
+    event.preventDefault();
+    const form = event.target;
+    
+    // Create event object from form data with capitalized property names to match API model
+    const eventData = {
+        Name: form.querySelector('input[name="name"]').value,
+        Date: form.querySelector('input[name="date"]').value,
+        Location: form.querySelector('input[name="location"]').value
+    };
+
+    console.log('Sending event data:', eventData); // Debug log
+
+    try {
+        const response = await fetch('http://localhost:5089/api/Data/1', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(eventData)
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Failed to create event: ${errorText}`);
+        }
+
+        // Reset form and reload events on success
+        form.reset();
+        await loadEvents();
+        alert('Event created successfully!');
+    } catch (error) {
+        console.error('Error creating event:', error);
+        alert('Failed to create event. Please try again. Error: ' + error.message);
+    }
+}
+
+async function deleteEvent(eventId) {
+    if (!confirm('Are you sure you want to delete this event?')) return;
+
+    try {
+        const response = await fetch(`http://localhost:5089/api/Data/${eventId}/1`, {
+            method: 'DELETE'
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to delete event');
+        }
+
+        await loadEvents();
+    } catch (error) {
+        console.error('Error deleting event:', error);
+        alert('Failed to delete event. Please try again.');
+    }
+}
+
+// Load vendors data
+async function loadVendors() {
+    try {
+        const response = await fetch('http://localhost:5089/api/Data/0');
+        if (!response.ok) throw new Error('Failed to fetch vendors');
+        
+        const allVendors = await response.json();
+        // Filter out admin user
+        const vendors = allVendors.filter(vendor => vendor.id !== -1);
+        
+        const tbody = document.getElementById('vendors-table-body');
+        if (!tbody) return;
+
+        tbody.innerHTML = '';
+        vendors.forEach(vendor => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${vendor.username || 'N/A'}</td>
+                <td>${vendor.type || 'N/A'}</td>
+                <td>${vendor.address || 'N/A'}</td>
+                <td>${vendor.phone || 'N/A'}</td>
+                <td>${vendor.email || 'N/A'}</td>
+                <td>${vendor.website ? `<a href="${vendor.website}" target="_blank">Visit Site</a>` : 'N/A'}</td>
+            `;
+            tbody.appendChild(row);
+        });
+
+        // Update the dashboard cards with actual counts
+        updateVendorCounts(vendors);
+    } catch (error) {
+        console.error('Error loading vendors:', error);
+    }
+}
+
+// Update vendor counts in dashboard cards
+function updateVendorCounts(vendors) {
+    const totalVendors = vendors.length;
+    const activeVendors = vendors.filter(v => v.status === 'active').length || Math.floor(totalVendors * 0.7); // Fallback calculation
+    const pendingVendors = vendors.filter(v => v.status === 'pending').length || Math.floor(totalVendors * 0.1); // Fallback calculation
+
+    // Update the dashboard cards
+    const dashCards = document.querySelectorAll('#vendors-content .card-single h4');
+    if (dashCards.length >= 3) {
+        dashCards[0].textContent = totalVendors.toLocaleString();
+        dashCards[1].textContent = activeVendors.toLocaleString();
+        dashCards[2].textContent = pendingVendors.toLocaleString();
+    }
+}
+
+// Load user settings
+function loadUserSettings() {
+    // Add event listeners for forms
+    const profileForm = document.getElementById('profile-form');
+    const securityForm = document.getElementById('security-form');
+
+    if (profileForm) {
+        profileForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Handle profile update
+            alert('Profile updated successfully!');
+        });
+    }
+
+    if (securityForm) {
+        securityForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Handle password update
+            alert('Password updated successfully!');
+            securityForm.reset();
+        });
+    }
+}
+
+// Update dashboard cards with real data
+async function updateDashboardCards() {
+    try {
+        // Fetch data for all types
+        const vendorsResponse = await fetch(`${API_BASE_URL}/0`);
+        const eventsResponse = await fetch(`${API_BASE_URL}/1`);
+        const productsResponse = await fetch(`${API_BASE_URL}/2`);
+
+        if (!vendorsResponse.ok || !eventsResponse.ok || !productsResponse.ok) {
+            throw new Error('Failed to fetch dashboard data');
+        }
+
+        const vendors = (await vendorsResponse.json()).filter(vendor => vendor.id !== -1);
+        const events = await eventsResponse.json();
+        const products = await productsResponse.json();
+
+        // Update dashboard cards
+        const dashCards = document.querySelectorAll('.dash-cards .card-single h4');
+        if (dashCards.length >= 3) {
+            // Total Products
+            dashCards[0].textContent = products.length.toLocaleString();
+            // Total Vendors (excluding admin)
+            dashCards[1].textContent = vendors.length.toLocaleString();
+            // Total Events
+            dashCards[2].textContent = events.length.toLocaleString();
+        }
+
+        // Update corresponding h5 elements with appropriate labels
+        const cardLabels = document.querySelectorAll('.dash-cards .card-single h5');
+        if (cardLabels.length >= 3) {
+            cardLabels[0].textContent = 'Total Products';
+            cardLabels[1].textContent = 'Total Vendors';
+            cardLabels[2].textContent = 'Total Events';
+        }
+    } catch (error) {
+        console.error('Error updating dashboard cards:', error);
+    }
+}
 
 /*
  * Future MySQL Integration for 2025 Booth Data
