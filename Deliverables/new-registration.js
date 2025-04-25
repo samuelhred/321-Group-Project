@@ -99,8 +99,13 @@ async function loadEvents() {
                         // Add a default option
                         const defaultOption = document.createElement("option");
                         defaultOption.textContent = "Select a product";
-                        defaultOption.value = "";
+                        defaultOption.value = "1";
                         productDropdown.appendChild(defaultOption);
+
+                        const noProductOption = document.createElement("option");
+                        noProductOption.value = "";
+                        noProductOption.textContent = "No Product";
+                        productDropdown.appendChild(noProductOption);
                         
                         try {
                             // Fetch existing products from the AP
@@ -197,8 +202,8 @@ async function loadEvents() {
                             } else if (selectedProductId) {
                                 // Handle existing product selection
                                 console.log(`Selected Product ID: ${selectedProductId}`);
-                            } else {
-                                alert("Please select a product or create a new one.");
+                            }else{
+                                alert("Please select an option");
                             }
                         });
 
@@ -433,7 +438,6 @@ function handleProductSubmission(event, textBox, namebox, vendorId) {
     else {
         return;
     }
-    console.log("Product object:", product);
 
     // If a product is defined, send it to the server
     if (product) {

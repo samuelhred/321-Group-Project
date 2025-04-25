@@ -59,10 +59,10 @@ async function handleSignUp(event) {
             body: JSON.stringify(vendor),
         });
         
-        console.log(vendor);
         // Handle the API response
         if (response.ok) {
             alert("Vendor account created successfully!");
+            window.location.href = "Login.html"; // Replace "/dashboard" with the actual URL of your dashboard
             // Redirect to the login page
         } else {
             // Check if the response is JSON or plain text

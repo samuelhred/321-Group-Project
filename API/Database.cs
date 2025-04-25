@@ -170,7 +170,7 @@ namespace API
 
                 string query = type switch
                 {
-                    0 => "INSERT INTO jaksf1wi5maqj0w4.Vendors (Name, Type, Address, Phone, Email, Website) VALUES (@Name, @Type, @Address, @Phone, @Email, @Website, @Username, @assword);",
+                    0 => "INSERT INTO jaksf1wi5maqj0w4.Vendors (Name, Type, Address, Phone, Email, Website, Username, Password) VALUES (@Name, @Type, @Address, @Phone, @Email, @Website, @Username, @Password);",
                     1 => "INSERT INTO jaksf1wi5maqj0w4.Events (Name, Date, Location) VALUES (@Name, @Date, @Location);",
                     2 => "INSERT INTO jaksf1wi5maqj0w4.Products (Name, Description, VendorId) VALUES (@Name, @Description, @VendorId);",
                     3 => "INSERT INTO jaksf1wi5maqj0w4.Registration (VendorId, ProductId, EventId ) VALUES (@VendorId, @ProductId, @EventId);",
