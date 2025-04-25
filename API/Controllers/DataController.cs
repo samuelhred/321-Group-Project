@@ -98,5 +98,39 @@ namespace MyApp.Namespace
             return NotFound("Item not found or failed to delete.");
         }
     }
+
+    // PATCH api/<ShopController>/5
+    [HttpPatch("{id}/{type}", Name = "PatchOne")]
+    public async Task<IActionResult> Patch(int id, int type, [FromBody] object updatedItem)
+    {
+        Database db = new();
+        bool success;
+
+        if (type == 1) // Events
+        {
+            try
+            {
+                var eventItem = System.Text.Json.JsonSerializer.Deserialize<Event>(updatedItem.ToString());
+                success = await db.UpdateEventAsync(id, eventItem);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Failed to parse event data: {ex.Message}");
+            }
+        }
+        else
+        {
+            success = await db.UpdateDataAsync(id, type, updatedItem);
+        }
+
+        if (success)
+        {
+            return Ok("Item updated successfully.");
+        }
+        else
+        {
+            return NotFound("Item not found or failed to update.");
+        }
+    }
     }
 }

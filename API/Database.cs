@@ -314,5 +314,29 @@ namespace API
                 return false;
             }
         }
+        public async Task<bool> UpdateEventAsync(int eventId, Event updatedEvent)
+        {
+            try
+            {
+                using var connection = new MySqlConnection(cs);
+                await connection.OpenAsync();
+
+                string query = "UPDATE jaksf1wi5maqj0w4.Events SET Name = @Name, Date = @Date, Location = @Location WHERE EventId = @Id;";
+
+                using var command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", eventId);
+                command.Parameters.AddWithValue("@Name", updatedEvent.Name);
+                command.Parameters.AddWithValue("@Date", updatedEvent.Date);
+                command.Parameters.AddWithValue("@Location", updatedEvent.Location);
+
+                int rowsAffected = await command.ExecuteNonQueryAsync();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in UpdateEventAsync: {ex.Message}");
+                return false;
+            }
+        }
     }
 }
