@@ -821,19 +821,66 @@ table tr:hover {
     margin-top: 1rem;
 }
 
-.delete-btn {
-    background-color: var(--crimson-flame);
-    color: var(--victory-white);
+/* Event table action buttons */
+.delete-btn, .edit-btn, .save-btn, .cancel-btn {
     border: none;
     padding: 6px 12px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.3s ease;
+    margin-right: 5px;
+}
+
+.delete-btn {
+    background-color: var(--crimson-flame);
+    color: var(--victory-white);
+}
+
+.edit-btn {
+    background-color: var(--capstone-gray);
+    color: var(--victory-white);
+}
+
+.save-btn {
+    background-color: #198754;
+    color: var(--victory-white);
+}
+
+.cancel-btn {
+    background-color: #6c757d;
+    color: var(--victory-white);
 }
 
 .delete-btn:hover {
     background-color: var(--bama-burgundy);
+}
+
+.edit-btn:hover {
+    background-color: #6c757d;
+}
+
+.save-btn:hover {
+    background-color: #146c43;
+}
+
+.cancel-btn:hover {
+    background-color: #5c636a;
+}
+
+/* Edit input styles */
+.edit-input {
+    width: 100%;
+    padding: 4px 8px;
+    border: 1px solid var(--chimes-gray);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.edit-input:focus {
+    outline: none;
+    border-color: var(--crimson-flame);
+    box-shadow: 0 0 0 2px rgba(158, 27, 50, 0.1);
 }
 
 @media screen and (max-width: 1200px) {
@@ -845,6 +892,47 @@ table tr:hover {
     .event-form-card {
         height: auto;
         max-height: calc(100vh - 280px);
+    }
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.toast {
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+    min-width: 200px;
+    animation: slideIn 0.3s ease-in-out;
+}
+
+.toast-success {
+    background-color: #4CAF50;
+}
+
+.toast-error {
+    background-color: #f44336;
+}
+
+.toast-info {
+    background-color: #2196F3;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 

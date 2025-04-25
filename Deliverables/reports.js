@@ -413,12 +413,22 @@ async function loadEvents() {
         tbody.innerHTML = '';
         events.forEach(event => {
             const row = document.createElement('tr');
-            const date = new Date(event.date).toLocaleDateString();
+            
+            // Format the date properly
+            let displayDate = 'N/A';
+            if (event.date) {
+                // Split the date string and create a new date using the components
+                const [year, month, day] = event.date.split('-');
+                const date = new Date(year, month - 1, day); // month is 0-based in JavaScript
+                displayDate = date.toLocaleDateString();
+            }
+            
             row.innerHTML = `
-                <td>${event.name || 'N/A'}</td>
-                <td>${date || 'N/A'}</td>
-                <td>${event.location || 'N/A'}</td>
+                <td class="event-data">${event.name || 'N/A'}</td>
+                <td class="event-data">${displayDate}</td>
+                <td class="event-data">${event.location || 'N/A'}</td>
                 <td>
+                    <button class="edit-btn" onclick="startEditEvent(${event.id}, this)">Edit</button>
                     <button class="delete-btn" onclick="deleteEvent(${event.id})">Delete</button>
                 </td>
             `;
@@ -434,6 +444,77 @@ async function loadEvents() {
             tbody.innerHTML = '<tr><td colspan="4">Failed to load events. Please try again later.</td></tr>';
         }
     }
+}
+
+// Function to start editing an event
+function startEditEvent(eventId, buttonElement) {
+    const row = buttonElement.closest('tr');
+    const cells = row.getElementsByClassName('event-data');
+    const currentName = cells[0].textContent;
+    
+    // Parse the date correctly
+    const dateParts = cells[1].textContent.split('/');
+    let currentDate = '';
+    if (dateParts.length === 3) {
+        // Convert MM/DD/YYYY to YYYY-MM-DD
+        const month = dateParts[0].padStart(2, '0');
+        const day = dateParts[1].padStart(2, '0');
+        const year = dateParts[2];
+        currentDate = `${year}-${month}-${day}`;
+    }
+    
+    const currentLocation = cells[2].textContent;
+
+    // Replace text with input fields
+    cells[0].innerHTML = `<input type="text" class="edit-input" value="${currentName === 'N/A' ? '' : currentName}">`;
+    cells[1].innerHTML = `<input type="date" class="edit-input" value="${currentDate}">`;
+    cells[2].innerHTML = `<input type="text" class="edit-input" value="${currentLocation === 'N/A' ? '' : currentLocation}">`;
+
+    // Change edit button to save button
+    const buttonCell = buttonElement.parentElement;
+    buttonCell.innerHTML = `
+        <button class="save-btn" onclick="saveEventEdit(${eventId}, this)">Save</button>
+        <button class="cancel-btn" onclick="cancelEdit(${eventId}, this)">Cancel</button>
+    `;
+}
+
+// Function to save event edits
+async function saveEventEdit(eventId, buttonElement) {
+    const row = buttonElement.closest('tr');
+    const inputs = row.getElementsByClassName('edit-input');
+    
+    // Get the date value and ensure it's in the correct format (YYYY-MM-DD)
+    const dateValue = inputs[1].value;
+    
+    const updatedEvent = {
+        Name: inputs[0].value,
+        Date: dateValue,
+        Location: inputs[2].value
+    };
+
+    try {
+        const response = await fetch(`http://localhost:5089/api/Data/${eventId}/1`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedEvent)
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Failed to update event: ${errorText}`);
+        }
+
+        await loadEvents();
+    } catch (error) {
+        console.error('Error updating event:', error);
+    }
+}
+
+// Function to cancel editing
+async function cancelEdit(eventId, buttonElement) {
+    await loadEvents(); // Reload the events to reset the view
 }
 
 // Update event counts in dashboard cards
