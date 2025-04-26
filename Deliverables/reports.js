@@ -650,7 +650,7 @@ function updateVendorCounts(vendors) {
 }
 
 // Load user settings
-function loadUserSettings() {
+async function loadUserSettings() {
     // Add event listeners for forms
     const profileForm = document.getElementById('profile-form');
     const securityForm = document.getElementById('security-form');
@@ -673,10 +673,32 @@ function loadUserSettings() {
                 alert('Passwords do not match!');
                 return;
             }
+            else{
+                alert('Password updated successfully!');
+                securityForm.reset();
+                const newLogin = {
+                    username: 'admin',
+                    password: newPassword,
+                    name: 'admin',
+                    type: 'admin',
+                    address: 'admin',
+                    phone: 'admin',
+                    email: 'admin',
+                    website: 'admin',
+                }
+                //send the new password to the server
+                const response  = fetch('http://localhost:5089/api/Data/1/0', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newLogin)
+                })
+
+            }
 
             // Handle password update
-            alert('Password updated successfully!');
-            securityForm.reset();
+            
         });
     }
 }

@@ -3,28 +3,28 @@ using API.Models;
 using Microsoft.Extensions.ObjectPool;
 using MySqlConnector;
 
-namespace API
+namespace API 
 {
     public class Database
     {
         private string cs = "Server=t89yihg12rw77y6f.cbetxkdyhwsb.us-east-1.rds.amazonaws.com;User ID=off48goef0ulemt7;Password=sid95mjw7064tld5;Database=jaksf1wi5maqj0w4";
         public async Task<object[]> GetAllDataAsync()
         {
-            // Fetch all data concurrently
+            
             var vendorsTask = GetAllVendorsAsync();
-            var eventsTask = GetAllEventsAsync(); // Assuming 0 is a placeholder for the `id` parameter
+            var eventsTask = GetAllEventsAsync(); 
             var registrationsTask = GetAllRegistrationsAsync();
             var productsTask = GetAllProductsAsync();
 
-            // Wait for all tasks to complete
+            
             await Task.WhenAll(vendorsTask, eventsTask, registrationsTask, productsTask);
 
-            // Create an array with the results
+            
             object[] allData = new object[4];
-            allData[0] = await vendorsTask;        // List<Vendor>
-            allData[1] = await eventsTask;         // List<Event>
-            allData[2] = await registrationsTask;  // List<Registration>
-            allData[3] = await productsTask;       // List<Product>
+            allData[0] = await vendorsTask;        
+            allData[1] = await eventsTask;         
+            allData[2] = await registrationsTask;  
+            allData[3] = await productsTask;       
 
             return allData;
         }
@@ -179,10 +179,9 @@ namespace API
 
                 using var command = new MySqlCommand(query, connection);
 
-                // Add parameters dynamically based on type
                 switch (type)
                 {
-                    case 0: // Vendors
+                    case 0: 
                         var vendor = System.Text.Json.JsonSerializer.Deserialize<Vendor>(newItem.ToString());
                         command.Parameters.AddWithValue("@Name", vendor.Name);
                         command.Parameters.AddWithValue("@Type", vendor.Type);
@@ -194,21 +193,21 @@ namespace API
                         command.Parameters.AddWithValue("@Password", vendor.Password);
                         break;
 
-                    case 1: // Events
+                    case 1: 
                         var eventItem = System.Text.Json.JsonSerializer.Deserialize<Event>(newItem.ToString());
                         command.Parameters.AddWithValue("@Name", eventItem.Name);
                         command.Parameters.AddWithValue("@Date", eventItem.Date);
                         command.Parameters.AddWithValue("@Location", eventItem.Location);
                         break;
 
-                    case 2: // Products
+                    case 2: 
                         var product = System.Text.Json.JsonSerializer.Deserialize<Product>(newItem.ToString());
                         command.Parameters.AddWithValue("@Name", product.Name);
                         command.Parameters.AddWithValue("@Description", product.Description);
                         command.Parameters.AddWithValue("@VendorId", product.VendorId);
                         break;
 
-                    case 3: // Registrations
+                    case 3: 
                         var registration = System.Text.Json.JsonSerializer.Deserialize<Registration>(newItem.ToString());
                         command.Parameters.AddWithValue("@EventId", registration.EventId);
                         command.Parameters.AddWithValue("@VendorId", registration.VendorId);
@@ -234,7 +233,7 @@ namespace API
 
                 string query = type switch
                 {
-                    0 => "UPDATE jaksf1wi5maqj0w4.Vendors SET Name = @Name, Type = @Type, Address = @Address, Phone = @Phone, Email = @Email, Website = @Website WHERE id = @Id;",
+                    0 => "UPDATE jaksf1wi5maqj0w4.Vendors SET Name = @Name, Type = @Type, Address = @Address, Phone = @Phone, Email = @Email, Website = @Website, Username = @Username, Password = @Password, WHERE id = @Id;",
                     1 => "UPDATE jaksf1wi5maqj0w4.Events SET Name = @Name, Date = @Date, Location = @Location, Description = @Description WHERE id = @Id;",
                     2 => "UPDATE jaksf1wi5maqj0w4.Products SET Name = @Name, Price = @Price, Description = @Description, VendorId = @VendorId WHERE id = @Id;",
                     3 => "UPDATE jaksf1wi5maqj0w4.Registration SET EventId = @EventId, UserId = @UserId, RegistrationDate = @RegistrationDate, Status = @Status WHERE id = @Id;",
@@ -243,11 +242,13 @@ namespace API
 
                 using var command = new MySqlCommand(query, connection);
 
-                // Add parameters dynamically based on type
+                if(id == 1){
+                    id = -1;
+                }
                 command.Parameters.AddWithValue("@Id", id);
                 switch (type)
                 {
-                    case 0: // Vendors
+                    case 0: 
                         var vendor = (Vendor)updatedItem;
                         command.Parameters.AddWithValue("@Name", vendor.Name);
                         command.Parameters.AddWithValue("@Type", vendor.Type);
@@ -255,23 +256,25 @@ namespace API
                         command.Parameters.AddWithValue("@Phone", vendor.Phone);
                         command.Parameters.AddWithValue("@Email", vendor.Email);
                         command.Parameters.AddWithValue("@Website", vendor.Website);
+                        command.Parameters.AddWithValue("@Username", vendor.Username);
+                        command.Parameters.AddWithValue("@Password", vendor.Password);
                         break;
 
-                    case 1: // Events
+                    case 1: 
                         var eventItem = (Event)updatedItem;
                         command.Parameters.AddWithValue("@Name", eventItem.Name);
                         command.Parameters.AddWithValue("@Date", eventItem.Date);
                         command.Parameters.AddWithValue("@Location", eventItem.Location);
                         break;
 
-                    case 2: // Products
+                    case 2: 
                         var product = (Product)updatedItem;
                         command.Parameters.AddWithValue("@Name", product.Name);
                         command.Parameters.AddWithValue("@Description", product.Description);
                         command.Parameters.AddWithValue("@VendorId", product.VendorId);
                         break;
 
-                    case 3: // Registrations
+                    case 3: 
                         var registration = (Registration)updatedItem;
                         command.Parameters.AddWithValue("@EventId", registration.EventId);
                         command.Parameters.AddWithValue("@VendorId", registration.VendorId);
@@ -328,6 +331,38 @@ namespace API
                 command.Parameters.AddWithValue("@Name", updatedEvent.Name);
                 command.Parameters.AddWithValue("@Date", updatedEvent.Date);
                 command.Parameters.AddWithValue("@Location", updatedEvent.Location);
+
+                int rowsAffected = await command.ExecuteNonQueryAsync();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in UpdateEventAsync: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateAccountAsync(Vendor updatedItem)
+        {
+            try
+            {
+                using var connection = new MySqlConnection(cs);
+                await connection.OpenAsync();
+
+                string query = "UPDATE jaksf1wi5maqj0w4.Vendors SET Name = @Name, Type = @Type, Address = @Address, Phone = @Phone, Email = @Email, Website = @Website, Username = @Username, Password = @Password, WHERE id = @Id;";
+                
+                using var command = new MySqlCommand(query, connection);
+                Vendor vendor = updatedItem;
+                int id = -1;
+                command.Parameters.AddWithValue("@Id", id);
+                command.Parameters.AddWithValue("@Name", vendor.Name);
+                command.Parameters.AddWithValue("@Type", vendor.Type);
+                command.Parameters.AddWithValue("@Address", vendor.Address);
+                command.Parameters.AddWithValue("@Phone", vendor.Phone);
+                command.Parameters.AddWithValue("@Email", vendor.Email);
+                command.Parameters.AddWithValue("@Website", vendor.Website);
+                command.Parameters.AddWithValue("@Username", vendor.Username);
+                command.Parameters.AddWithValue("@Password", vendor.Password);
 
                 int rowsAffected = await command.ExecuteNonQueryAsync();
                 return rowsAffected > 0;

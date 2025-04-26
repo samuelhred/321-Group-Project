@@ -472,8 +472,28 @@ function handleProductSubmission(event, textBox, namebox, vendorId) {
 
 // Validation Functions
 function validateCardNumber(cardNumber) {
-    if (!/^\d{16}$/.test(cardNumber)) return false; // Check if the card number is 16 digits
-    else return true;
+    const sanitizedCardNumber = cardNumber.replace(/\s/g, '');
+
+    if (!/^\d+$/.test(sanitizedCardNumber)) {
+        return false;
+    }
+
+    let sum = 0;
+    let isSecond = false;
+
+    for (let i = sanitizedCardNumber.length - 1; i >= 0; i--) {
+        let digit = parseInt(sanitizedCardNumber.charAt(i), 10);
+
+        if (isSecond) {
+            digit *= 2;
+            if (digit > 9) {
+                digit -= 9;
+            }
+        }
+        sum += digit;
+        isSecond = !isSecond;
+    }
+    return (sum % 10 === 0);
 }
 
 function validateExpirationDate(expirationDate) {

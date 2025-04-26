@@ -118,6 +118,19 @@ namespace MyApp.Namespace
                 return BadRequest($"Failed to parse event data: {ex.Message}");
             }
         }
+        else if(type == 2) // VENDORS
+        {
+            try
+            {
+                var vendorItem = System.Text.Json.JsonSerializer.Deserialize<Vendor>(updatedItem.ToString());
+                success = await db.UpdateAccountAsync(vendorItem);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Failed to parse vendor data: {ex.Message}");
+            }
+        }
+
         else
         {
             success = await db.UpdateDataAsync(id, type, updatedItem);

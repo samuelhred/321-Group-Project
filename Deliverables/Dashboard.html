@@ -66,9 +66,25 @@
     #products-section {
         margin-bottom: 50px; /* Add extra spacing below the products section */
     }
+    .delete-product-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background-color: #dc3545; /* Red button */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px; /* Add spacing above the button */
+    }
+    
+    .delete-product-button:hover {
+        background-color: #c82333;
+    }
     </style>
 <body>
-    <!-- Header -->
     <header>
         <div class="header-left">
             <a href="home.html"><span class="icon-vendor-cart"></span></a>
@@ -83,25 +99,29 @@
         </nav>
     </header>
 
-    <!-- Main Content -->
     <main>
         <section id="vendor-info">
-            <!-- Vendor info will be dynamically loaded here -->
         </section>
         <section id="registrations-section">
             <h2>Your Registrations</h2>
             <button id="new-registration-button" class="btn">Make New Registration</button>
             <div id="registrations-list">
-                <!-- Registrations will be dynamically loaded here -->
             </div>
             <div id="products-section">
                 <h2>All Products</h2>
-                <div id="products-list"></div>
+                <div id="products-list">
+                    <div class="product-box" data-product-id="${product.id}">
+                        <h3>${product.name || "N/A"}</h3>
+                        <p><strong>Description:</strong> ${product.description || "N/A"}</p>
+                        <button class="delete-product-button btn btn-danger" data-product-id="${product.id}">
+                            Delete
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-left">
             <p>&copy; 2025 Tuscaloosa Trade Fair Association. All rights reserved.</p>
